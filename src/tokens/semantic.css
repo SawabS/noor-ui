@@ -1,0 +1,49 @@
+/**
+ * Semantic tokens — the contract components are allowed to consume.
+ * Values here are the light-theme defaults; themes.css overrides the same
+ * variable names for [data-theme="dark"]. No component file should ever
+ * reference primitive.css directly or hard-code a hex value.
+ */
+:root,
+[data-theme="light"] {
+  /* Surfaces */
+  --n-canvas: var(--n-prim-white);
+  --n-sidebar: var(--n-prim-gray-25);
+  --n-surface: var(--n-prim-white);
+  --n-surface-raised: var(--n-prim-gray-50);
+  --n-surface-hover: var(--n-prim-gray-100);
+  --n-surface-active: var(--n-prim-gray-150);
+
+  /* Text */
+  --n-text-primary: var(--n-prim-gray-1000);
+  --n-text-secondary: var(--n-prim-gray-500);
+  --n-text-muted: var(--n-prim-gray-400);
+
+  /* Borders */
+  --n-border: var(--n-prim-gray-200);
+  --n-border-strong: var(--n-prim-gray-300);
+
+  /* Primary action (near-black on white, inverted in dark theme) */
+  --n-primary-action: var(--n-prim-gray-1000);
+  --n-primary-action-text: var(--n-prim-white);
+
+  /* Focus */
+  --n-focus-ring: var(--n-prim-gray-450);
+
+  /* Supporting semantic colors — same hue in both themes, used sparingly */
+  --n-success: var(--n-prim-green-500);
+  --n-warning: var(--n-prim-amber-500);
+  --n-danger: var(--n-prim-red-500);
+  --n-info: var(--n-prim-blue-500);
+
+  /* Soft tonal backgrounds for status surfaces (alerts, badges) */
+  --n-success-bg: #e7f5ee;
+  --n-warning-bg: #faf0dd;
+  --n-danger-bg: #fbe9e9;
+  --n-info-bg: #eaf1fe;
+
+  /* Shadow tint follows theme so elevation reads correctly on dark canvases */
+  --n-shadow-color: var(--n-prim-shadow-color);
+
+  color-scheme: light;
+}

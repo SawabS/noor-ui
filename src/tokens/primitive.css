@@ -1,0 +1,44 @@
+/**
+ * Primitive tokens — raw values with no semantic meaning attached.
+ * Nothing outside this file (and themes.css, which maps primitives to
+ * semantic roles) should reference these variables directly. Components
+ * must always consume semantic tokens (see semantic.css / themes.css).
+ */
+:root {
+  /* Neutral ramp — shared source of truth for both themes */
+  --n-prim-white: #ffffff;
+  --n-prim-gray-25: #f7f7f7;
+  --n-prim-gray-50: #f4f4f4;
+  --n-prim-gray-100: #eeeeee;
+  --n-prim-gray-150: #e7e7e7;
+  --n-prim-gray-200: #e5e5e5;
+  --n-prim-gray-300: #d4d4d4;
+  --n-prim-gray-400: #929292;
+  --n-prim-gray-450: #737373;
+  --n-prim-gray-500: #666666;
+  --n-prim-gray-700: #424242;
+  --n-prim-gray-750: #303030;
+  --n-prim-gray-800: #202020;
+  --n-prim-gray-850: #191919;
+  --n-prim-gray-900: #151515;
+  --n-prim-gray-950: #0d0d0d;
+  --n-prim-gray-1000: #171717;
+  --n-prim-black-soft: #111111;
+  --n-prim-gray-dark-100: #f2f2f2;
+  --n-prim-gray-dark-300: #a3a3a3;
+  --n-prim-gray-dark-400: #707070;
+
+  /* Accent ramp — used sparingly, never as dominant brand color */
+  --n-prim-green-500: #16a36a;
+  --n-prim-amber-500: #d98b18;
+  --n-prim-red-500: #dc4c4c;
+  --n-prim-blue-500: #4385f5;
+
+  /* Raw shadow primitives (alpha-black, theme-independent) */
+  --n-prim-shadow-color: 15 15 15;
+  --n-prim-shadow-color-dark: 0 0 0;
+
+  /* Raw opacity primitives */
+  --n-prim-opacity-40: 0.4;
+  --n-prim-opacity-60: 0.6;
+}

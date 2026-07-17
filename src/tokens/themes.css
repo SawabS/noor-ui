@@ -1,0 +1,70 @@
+/**
+ * Theme overrides. Applied via a `data-theme="light"|"dark"` attribute on
+ * <html> (set by ThemeProvider). Only semantic variable *values* change
+ * here — variable names never change, so components never need to branch
+ * on theme.
+ */
+[data-theme="dark"] {
+  --n-canvas: var(--n-prim-gray-950);
+  --n-sidebar: var(--n-prim-gray-900);
+  --n-surface: var(--n-prim-gray-850);
+  --n-surface-raised: var(--n-prim-gray-800);
+  --n-surface-hover: var(--n-prim-gray-750);
+  --n-surface-active: #303030;
+
+  --n-text-primary: var(--n-prim-gray-dark-100);
+  --n-text-secondary: var(--n-prim-gray-dark-300);
+  --n-text-muted: var(--n-prim-gray-dark-400);
+
+  --n-border: #303030;
+  --n-border-strong: #424242;
+
+  --n-primary-action: var(--n-prim-gray-dark-100);
+  --n-primary-action-text: var(--n-prim-black-soft);
+
+  --n-focus-ring: var(--n-prim-gray-dark-300);
+
+  --n-success-bg: #12301f;
+  --n-warning-bg: #332409;
+  --n-danger-bg: #331414;
+  --n-info-bg: #10203a;
+
+  --n-shadow-color: var(--n-prim-shadow-color-dark);
+
+  color-scheme: dark;
+}
+
+/* Respect an unset preference by following the OS, but only when the
+   consumer opts in via data-theme="system" (ThemeProvider resolves this
+   to light/dark itself; the media query is a no-JS fallback). */
+@media (prefers-color-scheme: dark) {
+  [data-theme="system"] {
+    --n-canvas: var(--n-prim-gray-950);
+    --n-sidebar: var(--n-prim-gray-900);
+    --n-surface: var(--n-prim-gray-850);
+    --n-surface-raised: var(--n-prim-gray-800);
+    --n-surface-hover: var(--n-prim-gray-750);
+    --n-surface-active: #303030;
+
+    --n-text-primary: var(--n-prim-gray-dark-100);
+    --n-text-secondary: var(--n-prim-gray-dark-300);
+    --n-text-muted: var(--n-prim-gray-dark-400);
+
+    --n-border: #303030;
+    --n-border-strong: #424242;
+
+    --n-primary-action: var(--n-prim-gray-dark-100);
+    --n-primary-action-text: var(--n-prim-black-soft);
+
+    --n-focus-ring: var(--n-prim-gray-dark-300);
+
+    --n-success-bg: #12301f;
+    --n-warning-bg: #332409;
+    --n-danger-bg: #331414;
+    --n-info-bg: #10203a;
+
+    --n-shadow-color: var(--n-prim-shadow-color-dark);
+
+    color-scheme: dark;
+  }
+}

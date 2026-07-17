@@ -1,0 +1,34 @@
+@import "./primitive.css";
+@import "./semantic.css";
+@import "./themes.css";
+@import "./typography.css";
+@import "./spacing.css";
+@import "./motion.css";
+
+@tailwind base;
+
+@layer base {
+  html {
+    font-family: var(--n-font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--n-canvas);
+    color: var(--n-text-primary);
+  }
+
+  ::selection {
+    background-color: var(--n-text-primary);
+    color: var(--n-canvas);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--n-focus-ring);
+    outline-offset: 2px;
+  }
+}
+
+@tailwind components;
+@tailwind utilities;

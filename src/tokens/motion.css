@@ -1,0 +1,29 @@
+/**
+ * Motion tokens: durations and easing curves. Kept short and understated —
+ * this system leans on tonal/opacity changes rather than large movement.
+ */
+:root {
+  --n-duration-instant: 80ms;
+  --n-duration-fast: 120ms;
+  --n-duration-base: 180ms;
+  --n-duration-slow: 260ms;
+
+  --n-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --n-ease-enter: cubic-bezier(0, 0, 0.2, 1);
+  --n-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* Global reduced-motion contract. Components that animate should also add
+   an explicit `motion-reduce:` Tailwind variant where the animation is
+   load-bearing (e.g. spinners keep spinning, but slide/fade transitions
+   collapse to instant). This rule is the safety net. */
+@media (prefers-reduced-motion: reduce) {
+  *:not([data-motion-safe]),
+  *:not([data-motion-safe])::before,
+  *:not([data-motion-safe])::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

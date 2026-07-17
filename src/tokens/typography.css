@@ -1,0 +1,60 @@
+/**
+ * Typography tokens. Noor does not bundle webfont files — host apps load
+ * "IBM Plex Sans" / "IBM Plex Sans Arabic" (or accept the system fallback)
+ * so licensing and subsetting stay in the consumer's control. The stack
+ * always degrades gracefully to system UI fonts.
+ *
+ * Arabic and Kurdish (Sorani, Arabic script) content needs taller line
+ * heights than Latin text at the same size to avoid clipping ascenders/
+ * diacritics — every step below is tuned generously rather than to Latin
+ * optical minimums.
+ */
+:root {
+  --n-font-sans:
+    "IBM Plex Sans", "IBM Plex Sans Arabic", "Noto Sans Arabic", Inter, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --n-font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, "Menlo", "Consolas", monospace;
+
+  /* Weights */
+  --n-weight-regular: 400;
+  --n-weight-medium: 500;
+  --n-weight-semibold: 600;
+  --n-weight-bold: 700;
+
+  /* Type scale: size / line-height, generous for Arabic-script content */
+  --n-text-caption-size: 0.6875rem; /* 11px */
+  --n-text-caption-line: 1rem; /* 16px */
+
+  --n-text-label-size: 0.75rem; /* 12px */
+  --n-text-label-line: 1.125rem; /* 18px */
+
+  --n-text-body-sm-size: 0.8125rem; /* 13px */
+  --n-text-body-sm-line: 1.375rem; /* 22px */
+
+  --n-text-body-size: 0.9375rem; /* 15px */
+  --n-text-body-line: 1.625rem; /* 26px */
+
+  --n-text-body-lg-size: 1.0625rem; /* 17px */
+  --n-text-body-lg-line: 1.75rem; /* 28px */
+
+  --n-text-heading-sm-size: 1.25rem; /* 20px */
+  --n-text-heading-sm-line: 1.75rem; /* 28px */
+
+  --n-text-heading-md-size: 1.5rem; /* 24px */
+  --n-text-heading-md-line: 2.125rem; /* 34px */
+
+  --n-text-heading-lg-size: 1.875rem; /* 30px */
+  --n-text-heading-lg-line: 2.5rem; /* 40px */
+
+  --n-text-display-size: 2.5rem; /* 40px */
+  --n-text-display-line: 3.25rem; /* 52px */
+}
+
+/* Arabic/Kurdish script needs more breathing room even at the same
+   declared line-height due to tall diacritic stacking; nudge letter
+   spacing to 0 (never negative) and let the taller scale above do the
+   rest. Consumers set lang="ar" / lang="ckb" on the RTL subtree. */
+:root[dir="rtl"],
+[dir="rtl"] {
+  letter-spacing: 0;
+}
