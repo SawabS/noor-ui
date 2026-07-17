@@ -1,9 +1,9 @@
 # Token reference
 
 Source of truth: `src/tokens/*.css`. This document mirrors it for quick
-lookup — if the two disagree, the CSS wins.
+lookup - if the two disagree, the CSS wins.
 
-## Color — light theme
+## Color - light theme
 
 | Token | Variable | Value |
 |---|---|---|
@@ -22,7 +22,7 @@ lookup — if the two disagree, the CSS wins.
 | primary-action-text | `--n-primary-action-text` | `#FFFFFF` |
 | focus-ring | `--n-focus-ring` | `#737373` |
 
-## Color — dark theme
+## Color - dark theme
 
 | Token | Variable | Value |
 |---|---|---|
@@ -77,20 +77,20 @@ Weights: regular 400, medium 500, semibold 600, bold 700.
 
 ## Geometry
 
-- **Radii** — xs 6px, sm 8px, md 12px, lg 16px, xl 24px, pill 9999px.
-- **Border widths** — default 1px, thick 2px.
-- **Shadows** — xs/sm/md/lg, all low-opacity tonal shadows composited from
+- **Radii** - xs 6px, sm 8px, md 12px, lg 16px, xl 24px, pill 9999px.
+- **Border widths** - default 1px, thick 2px.
+- **Shadows** - xs/sm/md/lg, all low-opacity tonal shadows composited from
   a theme-aware `--n-shadow-color`; never used as the primary elevation
   signal (background tone + border carry that job).
-- **Opacity** — disabled 0.45, muted 0.7.
-- **Control heights** — sm 32px, md 40px, lg 48px.
-- **Content widths** — sm 640px, md 768px, lg 896px, xl 1152px.
-- **Breakpoints** — xs 480px, sm 640px, md 768px, lg 1024px, xl 1280px, 2xl 1536px.
+- **Opacity** - disabled 0.45, muted 0.7.
+- **Control heights** - sm 32px, md 40px, lg 48px.
+- **Content widths** - sm 640px, md 768px, lg 896px, xl 1152px.
+- **Breakpoints** - xs 480px, sm 640px, md 768px, lg 1024px, xl 1280px, 2xl 1536px.
 
 ## Motion
 
-- **Durations** — instant 80ms, fast 120ms, base 180ms, slow 260ms.
-- **Easing** — standard `cubic-bezier(0.4,0,0.2,1)`, enter `cubic-bezier(0,0,0.2,1)`,
+- **Durations** - instant 80ms, fast 120ms, base 180ms, slow 260ms.
+- **Easing** - standard `cubic-bezier(0.4,0,0.2,1)`, enter `cubic-bezier(0,0,0.2,1)`,
   exit `cubic-bezier(0.4,0,1,1)`.
 - `prefers-reduced-motion: reduce` collapses all animation/transition
   durations globally except on elements marked `data-motion-safe`.

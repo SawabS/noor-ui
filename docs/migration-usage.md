@@ -118,18 +118,18 @@ If you're replacing an existing set of ad hoc or vendor components:
 
 1. **Start with tokens, not components.** Map your current design tokens
    (colors, spacing, radii) onto `src/tokens/*.css` first, even before
-   swapping any component — this alone often resolves most visual drift.
+   swapping any component - this alone often resolves most visual drift.
 2. **Swap layout/foundation primitives first** (`Typography`, `Separator`,
-   `Skeleton`) — low risk, high coverage, makes the rest of the migration
+   `Skeleton`) - low risk, high coverage, makes the rest of the migration
    incremental.
 3. **Replace overlays last.** Dialog/Drawer/DropdownMenu/CommandPalette
    usually have the most call sites with bespoke state management; migrate
    them component-by-component rather than in one pass, since Noor's
    overlays are Radix-based and expect controlled/uncontrolled `open` state
    in a specific shape (`open`/`onOpenChange`, matching Radix's own
-   convention) — check each call site's existing state wiring against that
+   convention) - check each call site's existing state wiring against that
    shape rather than assuming a 1:1 prop match.
 4. **Run the accessibility checklist** (`docs/accessibility.md`) against
-   each migrated screen — Noor's stricter focus/keyboard defaults sometimes
+   each migrated screen - Noor's stricter focus/keyboard defaults sometimes
    surface pre-existing gaps in app-level keyboard flow (e.g. a modal that
    previously didn't trap focus at all).

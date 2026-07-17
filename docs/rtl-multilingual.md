@@ -1,7 +1,7 @@
 # RTL and multilingual guidance
 
 Noor is built for English, Kurdish (Sorani, Arabic script), and Arabic
-interfaces from the ground up — RTL is a first-class layout mode, not a
+interfaces from the ground up - RTL is a first-class layout mode, not a
 mirrored afterthought.
 
 ## Turning on RTL
@@ -17,7 +17,7 @@ import { DirectionProvider } from "noor-ui/providers";
 `DirectionProvider` wraps Radix UI's own `DirectionProvider`, so every
 Radix-based primitive (Dialog, DropdownMenu, Select, Tooltip, Popover,
 Tabs, Accordion, ContextMenu, ...) automatically mirrors its interaction
-logic — content alignment, arrow-key traversal direction, slide-in edges —
+logic - content alignment, arrow-key traversal direction, slide-in edges -
 with no per-component configuration. By default it also writes
 `dir="rtl"` / `dir="ltr"` onto `<html>` so native browser chrome (scrollbars,
 native form controls, text selection) mirrors too; pass
@@ -56,27 +56,27 @@ auditing a change for RTL correctness.
 
 Directional icons (chevrons, arrows) that should visually flip under RTL use
 the `rtl:rotate-180` Tailwind variant rather than swapping which lucide icon
-is imported — one icon, one rotation rule.
+is imported - one icon, one rotation rule.
 
 ## Typography for Arabic-script content
 
 Arabic and Kurdish (Sorani) text stacks diacritics taller than Latin script
 at the same nominal font size. Noor's type scale (`src/tokens/typography.css`)
 is tuned with generous line-heights specifically so this content doesn't
-clip — e.g. `body` is 15px text on a 26px line-height, well beyond what
+clip - e.g. `body` is 15px text on a 26px line-height, well beyond what
 Latin text alone would need. If you introduce a new type scale step, keep
 that same generous ratio (roughly 1.6–1.75×) rather than optimizing purely
 for Latin optical density.
 
 Set `lang="ar"` or `lang="ckb"` on RTL subtrees so browsers and assistive
 tech apply correct script-specific behavior (hyphenation, spellcheck,
-screen-reader pronunciation) — `dir` alone isn't enough.
+screen-reader pronunciation) - `dir` alone isn't enough.
 
 ## Fonts
 
 Noor's font stack (`--n-font-sans`) leads with IBM Plex Sans / IBM Plex Sans
 Arabic / Noto Sans Arabic before falling back to system UI fonts. The
-package does **not** bundle font files — load them yourself (self-hosted or
+package does **not** bundle font files - load them yourself (self-hosted or
 via a font CDN) so subsetting and licensing stay under your control; the
 stack degrades gracefully to system fonts if you don't.
 

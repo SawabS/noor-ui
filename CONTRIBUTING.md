@@ -30,11 +30,11 @@ src/
 - **Styling**: Tailwind utility classes only, composed with `cn()` from
   `src/utilities/cn.ts` (clsx + tailwind-merge). Variant logic goes through
   `class-variance-authority` (`cva`). **Never** write a raw hex value or an
-  arbitrary pixel color in a component file — every color, radius, spacing,
+  arbitrary pixel color in a component file - every color, radius, spacing,
   shadow, motion and z-index value must resolve to a token defined in
   `src/tokens/*.css` (via the Tailwind theme mapping in `tailwind.config.ts`,
   or `bg-[var(--n-token-name)]` arbitrary-value syntax if no Tailwind utility
-  exists yet for it — and if you hit that case, prefer extending
+  exists yet for it - and if you hit that case, prefer extending
   `tailwind.config.ts` instead so the token gets a reusable utility name).
 - **Accessibility non-negotiables**: every interactive primitive needs a
   visible `focus-visible` ring (the shared pattern is
@@ -49,7 +49,7 @@ src/
   (`ml-`/`mr-`, `left-`/`right-`). Directional icons (chevrons, arrows) that
   must flip under RTL use the `rtl:rotate-180` utility rather than swapping
   the icon component. Never assume LTR text order in layout logic.
-- **Motion**: respect `prefers-reduced-motion` — it's handled globally in
+- **Motion**: respect `prefers-reduced-motion` - it's handled globally in
   `src/tokens/motion.css`, but any animation that's functionally essential
   (a loading spinner, not a slide-in transition) needs an explicit
   `data-motion-safe` attribute to opt out of the global kill-switch.
@@ -60,7 +60,7 @@ src/
 ## Adding a component
 
 1. Pick the right category folder (see the layout above).
-2. Write `ComponentName.tsx` following the conventions above — look at
+2. Write `ComponentName.tsx` following the conventions above - look at
    `src/components/inputs/Button.tsx` as the canonical reference
    implementation.
 3. Write `ComponentName.stories.tsx` (Storybook 8, CSF3, `tags: ["autodocs"]`)
@@ -68,7 +68,7 @@ src/
    applicable, and an RTL story if the component has any direction-sensitive
    layout.
 4. Add tests in `ComponentName.test.tsx` for behavior that isn't just visual
-   — keyboard interaction, focus management, controlled/uncontrolled state.
+   - keyboard interaction, focus management, controlled/uncontrolled state.
 5. Export it from the category's `index.ts` barrel and, transitively, from
    `src/index.ts`.
 6. Run `npm run typecheck && npm run test && npm run lint` before opening a
@@ -76,7 +76,7 @@ src/
 
 ## Adding or changing a token
 
-Tokens are the single source of truth for visual language — never patch a
+Tokens are the single source of truth for visual language - never patch a
 one-off value into a component. If an existing token doesn't fit:
 
 1. Add the primitive (if it's a genuinely new raw value) to
@@ -90,5 +90,5 @@ one-off value into a component. If an existing token doesn't fit:
 
 ## Commit style
 
-Small, focused commits. Describe the *why*, not just the *what* — the diff
+Small, focused commits. Describe the *why*, not just the *what* - the diff
 already shows what changed.
