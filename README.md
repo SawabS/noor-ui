@@ -4,7 +4,7 @@ A restrained, monochromatic React design system for AI products. Built for
 multilingual interfaces (English, Kurdish, Arabic) with full RTL support and
 WCAG 2.2 AA accessibility as a baseline, not an afterthought.
 
-Noor ("light" — نور / نوور) is an original design language inspired by the
+Noor ("light": نور / نوور) is an original design language inspired by the
 current wave of minimal, low-noise AI product interfaces. It is not a copy of
 any proprietary product's assets, icons, or code.
 
@@ -13,9 +13,9 @@ any proprietary product's assets, icons, or code.
 Most component libraries are either too opinionated about color (a loud brand
 blue baked into every control) or too bare (unstyled primitives you re-skin
 from scratch). Noor sits in between: a small, coherent set of semantic design
-tokens driving a full component set, tuned for chat/agent/research UIs —
-composer bars, streaming messages, citations, tool-call cards — as much as
-for conventional forms and dashboards.
+tokens driving a full component set, tuned for chat/agent/research UIs,
+including composer bars, streaming messages, citations, and tool-call cards,
+as much as for conventional forms and dashboards.
 
 ## Install
 
@@ -46,7 +46,7 @@ function App() {
 
 Import the stylesheet once, at your app's entry point. It contains the token
 CSS custom properties (light + dark) and the compiled Tailwind utility
-classes every component depends on — component files never inline raw color
+classes every component depends on; component files never inline raw color
 or spacing values, so nothing renders correctly without it.
 
 ## Package structure
@@ -60,17 +60,17 @@ or spacing values, so nothing renders correctly without it.
 
 ## Documentation
 
-- [`DESIGN_SYSTEM.md`](./DESIGN_SYSTEM.md) — design principles, token
+- [`DESIGN_SYSTEM.md`](./DESIGN_SYSTEM.md): design principles, token
   reference, component inventory
-- [`CONTRIBUTING.md`](./CONTRIBUTING.md) — how to add or change a component
-- [`docs/tokens.md`](./docs/tokens.md) — full token reference
-- [`docs/components.md`](./docs/components.md) — component API index
-- [`docs/accessibility.md`](./docs/accessibility.md) — accessibility
+- [`CONTRIBUTING.md`](./CONTRIBUTING.md): how to add or change a component
+- [`docs/tokens.md`](./docs/tokens.md): full token reference
+- [`docs/components.md`](./docs/components.md): component API index
+- [`docs/accessibility.md`](./docs/accessibility.md): accessibility
   guidelines and testing checklist
-- [`docs/rtl-multilingual.md`](./docs/rtl-multilingual.md) — RTL and
+- [`docs/rtl-multilingual.md`](./docs/rtl-multilingual.md): RTL and
   multilingual (EN/KU/AR) guidance
-- [`docs/dark-mode.md`](./docs/dark-mode.md) — theming guidance
-- [`docs/migration-usage.md`](./docs/migration-usage.md) — usage examples
+- [`docs/dark-mode.md`](./docs/dark-mode.md): theming guidance
+- [`docs/migration-usage.md`](./docs/migration-usage.md): usage examples
   and migration notes
 
 ## Local development
