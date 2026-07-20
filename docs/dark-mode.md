@@ -1,12 +1,12 @@
-# Dark mode guidance
+# Color theme guidance
 
 ## How theming works
 
-Theme switching is driven entirely by a `data-theme="light" | "dark" | "system"`
-attribute and semantic CSS custom properties - no component ever branches on
+Theme switching is driven entirely by a `data-theme` attribute and semantic
+CSS custom properties - no component ever branches on
 theme in JS or ships a `dark:` Tailwind variant. `src/tokens/semantic.css`
-defines the light-theme values as the default; `src/tokens/themes.css`
-overrides the same variable *names* under `[data-theme="dark"]`. Because
+defines the Noor light values as the default; `src/tokens/themes.css`
+overrides the same variable _names_ for every named palette. Because
 components only ever consume the semantic names (`bg-canvas`,
 `text-text-primary`, etc.), swapping the attribute is the entire theme
 switch - no re-render logic, no prop drilling.
@@ -16,7 +16,7 @@ import { ThemeProvider } from "noor-ui/providers";
 
 <ThemeProvider defaultTheme="system">
   <App />
-</ThemeProvider>
+</ThemeProvider>;
 ```
 
 `ThemeProvider`:
@@ -26,18 +26,36 @@ import { ThemeProvider } from "noor-ui/providers";
 - Persists the user's explicit choice to `localStorage` (key
   `noor-ui-theme` by default; pass `storageKey={null}` to disable, or a
   custom key to namespace it).
+- Supports the built-in `light`, `dark`, `github-light`, `github-dark`,
+  `dracula`, `one-dark-pro`, `nord`, and `catppuccin-mocha` palettes, plus
+  `system`.
 - Supports controlled usage (`theme` prop) if you're driving theme from your
   own app state instead.
 - Defaults to `scope="root"`, writing `data-theme` onto `<html>` so the
   whole document themes consistently - including anything rendered outside
   React (portals, `<body>` background). Pass `scope="scoped"` to instead
-  wrap children in a themed `<div>`, useful for rendering light and dark
+  wrap children in a themed `<div>`, useful for rendering palettes
   side-by-side (Noor's own token showcase page does this).
 
-`useTheme()` exposes `{ theme, resolvedTheme, setTheme }` - `theme` is
-whatever was set (including `"system"`), `resolvedTheme` is always
-`"light"` or `"dark"`. `ThemeToggle` is a ready-made control that cycles
-light → dark → system.
+`useTheme()` exposes `{ theme, activeTheme, resolvedTheme, setTheme }`.
+`theme` is the saved choice, `activeTheme` is the concrete palette applied
+to the DOM, and `resolvedTheme` is its `"light"` or `"dark"` browser color
+scheme. `ThemeToggle` remains a compact light → dark → system control;
+`ThemePicker` exposes every palette.
+
+```tsx
+import { ThemePicker } from "noor-ui";
+
+<ThemePicker aria-label="Color theme" />;
+```
+
+The named palettes are adapted from their canonical colors to Noor's semantic
+surface, text, border, action, focus, and status roles. The source references
+are [GitHub Primer](https://primer.style/product/primitives/),
+[Dracula](https://github.com/dracula/dracula-theme),
+[One Dark Pro](https://github.com/Binaryify/OneDark-Pro),
+[Nord](https://www.nordtheme.com/docs/colors-and-palettes/), and
+[Catppuccin](https://github.com/catppuccin/palette).
 
 ## Guidance for consumers extending the system
 
@@ -45,7 +63,7 @@ light → dark → system.
   new semantic role (e.g. a brand-specific accent), add it as a token in
   `semantic.css`/`themes.css` following the existing pattern, not as a
   conditional `resolvedTheme === "dark" ? "#fff" : "#000"` in JS.
-- **Contrast is verified per theme independently**, not derived - dark mode
+- **Contrast is verified per theme independently**, not derived - a dark theme
   is not simply light mode inverted. The dark palette uses slightly softer
   absolute contrast at the surface-elevation steps (since dark UIs read as
   "brighter than they measure" perceptually) while keeping text contrast at

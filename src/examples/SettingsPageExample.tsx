@@ -10,16 +10,15 @@ import {
 } from "../components/data-display/Card";
 import { FormField } from "../components/inputs/FormField";
 import { Select } from "../components/inputs/Select";
-import { Switch } from "../components/inputs/Switch";
 import { SegmentedControl } from "../components/inputs/SegmentedControl";
+import { ThemePicker } from "../components/inputs/ThemePicker";
+import { Switch } from "../components/inputs/Switch";
 import { Separator } from "../components/primitives/Separator";
 import { Typography } from "../components/primitives/Typography";
-import { useTheme } from "../providers/theme-provider";
 import { useDirection } from "../providers/direction-provider";
 
 /** Screen 4: settings — theme and language controls, driving the real providers. */
 export function SettingsPageExample() {
-  const { theme, setTheme } = useTheme();
   const { direction, setDirection } = useDirection();
   const [language, setLanguage] = React.useState("en");
   const [streaming, setStreaming] = React.useState(true);
@@ -40,16 +39,7 @@ export function SettingsPageExample() {
             </CardHeader>
             <CardContent className="flex flex-col gap-4">
               <FormField label="Theme">
-                <SegmentedControl
-                  aria-label="Theme"
-                  value={theme}
-                  onValueChange={(v) => setTheme(v as typeof theme)}
-                  options={[
-                    { value: "light", label: "Light" },
-                    { value: "dark", label: "Dark" },
-                    { value: "system", label: "System" },
-                  ]}
-                />
+                <ThemePicker aria-label="Theme" />
               </FormField>
               <Separator />
               <div className="flex items-center justify-between gap-4">

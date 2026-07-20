@@ -12,3 +12,5 @@ export * from "./Select";
 export * from "./Slider";
 export * from "./Switch";
 export * from "./Textarea";
+export { ThemePicker } from "./ThemePicker";
+export type { ThemePickerProps } from "./ThemePicker";

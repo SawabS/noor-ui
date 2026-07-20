@@ -1,7 +1,7 @@
 import type { Preview } from "@storybook/react";
 import React, { useEffect } from "react";
 import "../src/tokens/build-entry.css";
-import { ThemeProvider } from "../src/providers/theme-provider";
+import { ThemeProvider, themeOptions } from "../src/providers/theme-provider";
 import { DirectionProvider } from "../src/providers/direction-provider";
 
 const preview: Preview = {
@@ -18,10 +18,7 @@ const preview: Preview = {
       toolbar: {
         title: "Theme",
         icon: "circlehollow",
-        items: [
-          { value: "light", title: "Light" },
-          { value: "dark", title: "Dark" },
-        ],
+        items: themeOptions.map(({ value, label }) => ({ value, title: label })),
         dynamicTitle: true,
       },
     },

@@ -1,5 +1,5 @@
 /**
- * Theme overrides. Applied via a `data-theme="light"|"dark"` attribute on
+ * Theme overrides. Applied via a `data-theme` attribute on
  * <html> (set by ThemeProvider). Only semantic variable *values* change
  * here — variable names never change, so components never need to branch
  * on theme.
@@ -31,6 +31,174 @@
 
   --n-shadow-color: var(--n-prim-shadow-color-dark);
 
+  color-scheme: dark;
+}
+
+/* GitHub Primer — default light color mode. */
+[data-theme="github-light"] {
+  --n-canvas: #ffffff;
+  --n-sidebar: #f6f8fa;
+  --n-surface: #ffffff;
+  --n-surface-raised: #f6f8fa;
+  --n-surface-hover: #eff2f5;
+  --n-surface-active: #e7ecf0;
+  --n-text-primary: #1f2328;
+  --n-text-secondary: #59636e;
+  --n-text-muted: #6e7781;
+  --n-border: #d1d9e0;
+  --n-border-strong: #818b98;
+  --n-primary-action: #1f883d;
+  --n-primary-action-text: #ffffff;
+  --n-focus-ring: #0969da;
+  --n-success: #1a7f37;
+  --n-warning: #9a6700;
+  --n-danger: #cf222e;
+  --n-info: #0969da;
+  --n-success-bg: #dafbe1;
+  --n-warning-bg: #fff8c5;
+  --n-danger-bg: #ffebe9;
+  --n-info-bg: #ddf4ff;
+  --n-shadow-color: 31 35 40;
+  color-scheme: light;
+}
+
+/* GitHub Primer — default dark color mode. */
+[data-theme="github-dark"] {
+  --n-canvas: #0d1117;
+  --n-sidebar: #010409;
+  --n-surface: #161b22;
+  --n-surface-raised: #21262d;
+  --n-surface-hover: #292e36;
+  --n-surface-active: #30363d;
+  --n-text-primary: #e6edf3;
+  --n-text-secondary: #8b949e;
+  --n-text-muted: #7d8590;
+  --n-border: #30363d;
+  --n-border-strong: #484f58;
+  --n-primary-action: #238636;
+  --n-primary-action-text: #ffffff;
+  --n-focus-ring: #1f6feb;
+  --n-success: #3fb950;
+  --n-warning: #d29922;
+  --n-danger: #f85149;
+  --n-info: #58a6ff;
+  --n-success-bg: #12261e;
+  --n-warning-bg: #2e230f;
+  --n-danger-bg: #2d1718;
+  --n-info-bg: #13233a;
+  --n-shadow-color: 0 0 0;
+  color-scheme: dark;
+}
+
+/* Dracula OSS palette. */
+[data-theme="dracula"] {
+  --n-canvas: #282a36;
+  --n-sidebar: #21222c;
+  --n-surface: #2d303e;
+  --n-surface-raised: #383b4c;
+  --n-surface-hover: #44475a;
+  --n-surface-active: #50546a;
+  --n-text-primary: #f8f8f2;
+  --n-text-secondary: #c9c9c2;
+  --n-text-muted: #9aa7cf;
+  --n-border: #44475a;
+  --n-border-strong: #6272a4;
+  --n-primary-action: #bd93f9;
+  --n-primary-action-text: #282a36;
+  --n-focus-ring: #8be9fd;
+  --n-success: #50fa7b;
+  --n-warning: #f1fa8c;
+  --n-danger: #ff5555;
+  --n-info: #8be9fd;
+  --n-success-bg: #24452f;
+  --n-warning-bg: #494b2f;
+  --n-danger-bg: #4b2831;
+  --n-info-bg: #29434e;
+  --n-shadow-color: 15 16 22;
+  color-scheme: dark;
+}
+
+/* One Dark Pro, based on Atom's One Dark palette. */
+[data-theme="one-dark-pro"] {
+  --n-canvas: #282c34;
+  --n-sidebar: #21252b;
+  --n-surface: #2c313a;
+  --n-surface-raised: #353b45;
+  --n-surface-hover: #3e4451;
+  --n-surface-active: #4b5263;
+  --n-text-primary: #abb2bf;
+  --n-text-secondary: #9da5b4;
+  --n-text-muted: #8c93a2;
+  --n-border: #3e4451;
+  --n-border-strong: #5c6370;
+  --n-primary-action: #61afef;
+  --n-primary-action-text: #21252b;
+  --n-focus-ring: #61afef;
+  --n-success: #98c379;
+  --n-warning: #e5c07b;
+  --n-danger: #e06c75;
+  --n-info: #61afef;
+  --n-success-bg: #2d3d2d;
+  --n-warning-bg: #453c2b;
+  --n-danger-bg: #452d33;
+  --n-info-bg: #263c4f;
+  --n-shadow-color: 15 17 21;
+  color-scheme: dark;
+}
+
+/* Nord — Polar Night surfaces, Snow Storm text, Frost accent. */
+[data-theme="nord"] {
+  --n-canvas: #2e3440;
+  --n-sidebar: #292e39;
+  --n-surface: #3b4252;
+  --n-surface-raised: #434c5e;
+  --n-surface-hover: #4c566a;
+  --n-surface-active: #56647a;
+  --n-text-primary: #eceff4;
+  --n-text-secondary: #d8dee9;
+  --n-text-muted: #aeb8c8;
+  --n-border: #4c566a;
+  --n-border-strong: #69778f;
+  --n-primary-action: #88c0d0;
+  --n-primary-action-text: #2e3440;
+  --n-focus-ring: #88c0d0;
+  --n-success: #a3be8c;
+  --n-warning: #ebcb8b;
+  --n-danger: #bf616a;
+  --n-info: #81a1c1;
+  --n-success-bg: #354238;
+  --n-warning-bg: #4b4434;
+  --n-danger-bg: #483238;
+  --n-info-bg: #344152;
+  --n-shadow-color: 20 23 29;
+  color-scheme: dark;
+}
+
+/* Catppuccin Mocha — mauve accent. */
+[data-theme="catppuccin-mocha"] {
+  --n-canvas: #1e1e2e;
+  --n-sidebar: #181825;
+  --n-surface: #24243a;
+  --n-surface-raised: #313244;
+  --n-surface-hover: #45475a;
+  --n-surface-active: #585b70;
+  --n-text-primary: #cdd6f4;
+  --n-text-secondary: #bac2de;
+  --n-text-muted: #9399b2;
+  --n-border: #45475a;
+  --n-border-strong: #6c7086;
+  --n-primary-action: #cba6f7;
+  --n-primary-action-text: #1e1e2e;
+  --n-focus-ring: #89b4fa;
+  --n-success: #a6e3a1;
+  --n-warning: #f9e2af;
+  --n-danger: #f38ba8;
+  --n-info: #89b4fa;
+  --n-success-bg: #2a3c32;
+  --n-warning-bg: #463f32;
+  --n-danger-bg: #432d3b;
+  --n-info-bg: #28364d;
+  --n-shadow-color: 10 10 16;
   color-scheme: dark;
 }
 
