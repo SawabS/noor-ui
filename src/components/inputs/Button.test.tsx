@@ -50,4 +50,16 @@ describe("Button", () => {
     await user.keyboard("{Enter}");
     expect(onClick).toHaveBeenCalledTimes(1);
   });
+
+  it("renders as its child element with asChild, including alongside icons", () => {
+    render(
+      <Button asChild leadingIcon={<span data-testid="lead" />}>
+        <a href="/overview">Overview</a>
+      </Button>,
+    );
+    const link = screen.getByRole("link", { name: "Overview" });
+    expect(link).toHaveAttribute("href", "/overview");
+    expect(screen.queryByRole("button")).not.toBeInTheDocument();
+    expect(screen.getByTestId("lead")).toBeInTheDocument();
+  });
 });

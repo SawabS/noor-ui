@@ -1,6 +1,7 @@
 import * as React from "react";
 import { AlertTriangle } from "lucide-react";
 import { cn } from "../../utilities/cn";
+import { isIconComponent } from "../../utilities/is-icon-component";
 import { Icon } from "../primitives/Icon";
 import { Typography } from "../primitives/Typography";
 import { Button } from "../inputs/Button";
@@ -22,7 +23,7 @@ export const ErrorState = React.forwardRef<HTMLDivElement, ErrorStateProps>(
       )}
       {...props}
     >
-      {typeof icon === "function" ? (
+      {isIconComponent(icon) ? (
         <Icon icon={icon} size="xl" className="text-danger" />
       ) : icon ? (
         <div className="text-danger">{icon}</div>
