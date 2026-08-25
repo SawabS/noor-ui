@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
+import { Slot, Slottable } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utilities/cn";
 import { Spinner } from "../primitives/Spinner";
@@ -71,7 +71,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {loading ? <Spinner size="sm" label="" aria-hidden="true" /> : leadingIcon}
-        {children}
+        {/* Slottable marks which child Slot should merge onto, so `asChild`
+            keeps working alongside the leading/trailing icon slots. Without
+            it Slot receives three children and throws. */}
+        <Slottable>{children}</Slottable>
         {!loading && trailingIcon}
       </Comp>
     );

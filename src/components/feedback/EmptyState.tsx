@@ -1,6 +1,7 @@
 import * as React from "react";
 import type { LucideIcon } from "lucide-react";
 import { cn } from "../../utilities/cn";
+import { isIconComponent } from "../../utilities/is-icon-component";
 import { Icon } from "../primitives/Icon";
 import { Typography } from "../primitives/Typography";
 
@@ -22,7 +23,7 @@ export const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
       {...props}
     >
       {icon &&
-        (typeof icon === "function" ? (
+        (isIconComponent(icon) ? (
           <Icon icon={icon} size="xl" className="text-text-muted" />
         ) : (
           <div className="text-text-muted">{icon}</div>
