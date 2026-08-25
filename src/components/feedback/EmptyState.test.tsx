@@ -29,4 +29,9 @@ describe("EmptyState", () => {
     expect(screen.getByText("Upload a file to begin.")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Upload" })).toBeInTheDocument();
   });
+
+  it("allows consumers to choose the semantic heading level", () => {
+    render(<EmptyState heading="Page title" headingAs="h1" />);
+    expect(screen.getByRole("heading", { level: 1, name: "Page title" })).toBeInTheDocument();
+  });
 });

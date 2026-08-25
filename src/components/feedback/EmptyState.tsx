@@ -8,12 +8,14 @@ import { Typography } from "../primitives/Typography";
 export interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: LucideIcon | React.ReactNode;
   heading: string;
+  /** Semantic heading element. Defaults to h3 through the heading-sm type style. */
+  headingAs?: "h1" | "h2" | "h3";
   description?: React.ReactNode;
   action?: React.ReactNode;
 }
 
 export const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
-  ({ className, icon, heading, description, action, ...props }, ref) => (
+  ({ className, icon, heading, headingAs, description, action, ...props }, ref) => (
     <div
       ref={ref}
       className={cn(
@@ -28,7 +30,7 @@ export const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
         ) : (
           <div className="text-text-muted">{icon}</div>
         ))}
-      <Typography variant="heading-sm" className="mt-1">
+      <Typography as={headingAs} variant="heading-sm" className="mt-1">
         {heading}
       </Typography>
       {description && (
