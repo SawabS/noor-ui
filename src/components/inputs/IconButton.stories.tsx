@@ -7,6 +7,7 @@ const meta: Meta<typeof IconButton> = {
   title: "Inputs/IconButton",
   component: IconButton,
   tags: ["autodocs"],
+  parameters: { a11y: { test: "error" } },
   args: { "aria-label": "Search" },
 };
 export default meta;

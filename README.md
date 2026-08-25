@@ -28,17 +28,18 @@ React 18+ and React DOM 18+ are peer dependencies.
 ## Quick start
 
 ```tsx
-import { ThemeProvider } from "noor-ui/providers";
-import { DirectionProvider } from "noor-ui/providers";
+import { AppearanceProvider, DirectionProvider, ThemeProvider } from "noor-ui/providers";
 import { Button, PromptComposer, ChatLayout } from "noor-ui";
 import "noor-ui/styles.css";
 
 function App() {
   return (
     <ThemeProvider defaultTheme="system">
-      <DirectionProvider defaultDirection="ltr">
-        <Button>Get started</Button>
-      </DirectionProvider>
+      <AppearanceProvider>
+        <DirectionProvider defaultDirection="ltr">
+          <Button>Get started</Button>
+        </DirectionProvider>
+      </AppearanceProvider>
     </ThemeProvider>
   );
 }
@@ -47,6 +48,23 @@ function App() {
 Noor UI includes Noor Light/Dark, GitHub Light/Dark, Dracula, One Dark Pro,
 Nord, and Catppuccin Mocha palettes. Use `ThemePicker` for the complete list or
 `ThemeToggle` for the compact light/dark/system cycle.
+
+### Opt into Noor Lumen
+
+Noor Lumen is an independent appearance profile. It can be combined with any
+color theme without changing direction or color-mode state:
+
+```tsx
+<ThemeProvider defaultTheme="system">
+  <AppearanceProvider defaultAppearance="lumen">
+    <App />
+  </AppearanceProvider>
+</ThemeProvider>
+```
+
+Set `defaultTransparency="reduce"` or let the default `"system"` value honor
+the platform preference. See [`docs/lumen.md`](./docs/lumen.md) for material
+selection, scoped previews, fallbacks, accessibility, and migration.
 
 Import the stylesheet once, at your app's entry point. It contains the token
 CSS custom properties for every palette and the compiled Tailwind utility
@@ -58,7 +76,7 @@ or spacing values, so nothing renders correctly without it.
 | Import               | Contents                                              |
 | -------------------- | ----------------------------------------------------- |
 | `noor-ui`            | All components, foundations, hooks, utilities         |
-| `noor-ui/providers`  | `ThemeProvider`, `DirectionProvider` and their hooks  |
+| `noor-ui/providers`  | Theme, appearance, direction providers and hooks      |
 | `noor-ui/tokens`     | Programmatic token manifest (colors, scale, metadata) |
 | `noor-ui/styles.css` | Compiled CSS: tokens + Tailwind utilities             |
 
@@ -74,6 +92,8 @@ or spacing values, so nothing renders correctly without it.
 - [`docs/rtl-multilingual.md`](./docs/rtl-multilingual.md): RTL and
   multilingual (EN/KU/AR) guidance
 - [`docs/dark-mode.md`](./docs/dark-mode.md): theming guidance
+- [`docs/lumen.md`](./docs/lumen.md): Noor Lumen appearance and migration
+- [`docs/lumen-release.md`](./docs/lumen-release.md): prerelease verification and size record
 - [`docs/migration-usage.md`](./docs/migration-usage.md): usage examples
   and migration notes
 
@@ -86,6 +106,7 @@ npm run test              # Vitest
 npm run typecheck
 npm run build              # library build (tsup + Tailwind CSS)
 npm run build:storybook
+npm run test:visual       # pinned Chromium screenshots
 ```
 
 ## License

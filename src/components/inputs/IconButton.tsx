@@ -14,12 +14,12 @@ export const iconButtonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-primary-action text-primary-action-text hover:opacity-90",
+        primary: "n-primary-control bg-primary-action text-primary-action-text hover:opacity-90",
         secondary:
-          "bg-surface-raised text-text-primary border border-border hover:bg-surface-hover",
+          "n-control bg-surface-raised text-text-primary border border-border hover:bg-surface-hover",
         ghost: "bg-transparent text-text-secondary hover:bg-surface-hover hover:text-text-primary",
         outline:
-          "border border-border-strong text-text-primary bg-transparent hover:bg-surface-hover",
+          "n-control border border-border-strong text-text-primary bg-transparent hover:bg-surface-hover",
       },
       size: {
         sm: "size-8",

@@ -7,6 +7,7 @@ const meta: Meta<typeof Popover> = {
   title: "Overlays/Popover",
   component: Popover,
   tags: ["autodocs"],
+  parameters: { a11y: { test: "error" } },
 };
 export default meta;
 type Story = StoryObj<typeof Popover>;

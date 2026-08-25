@@ -14,13 +14,13 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-primary-action text-primary-action-text hover:opacity-90",
+        primary: "n-primary-control bg-primary-action text-primary-action-text hover:opacity-90",
         secondary:
-          "bg-surface-raised text-text-primary border border-border hover:bg-surface-hover",
+          "n-control bg-surface-raised text-text-primary border border-border hover:bg-surface-hover",
         outline:
-          "border border-border-strong text-text-primary bg-transparent hover:bg-surface-hover",
+          "n-control border border-border-strong text-text-primary bg-transparent hover:bg-surface-hover",
         ghost: "bg-transparent text-text-primary hover:bg-surface-hover",
-        danger: "bg-danger text-white hover:opacity-90",
+        danger: "bg-danger text-danger-contrast hover:opacity-90",
         link: "bg-transparent text-text-primary underline-offset-4 hover:underline p-0 h-auto",
       },
       size: {

@@ -5,6 +5,7 @@ const meta: Meta<typeof Tabs> = {
   title: "Navigation/Tabs",
   component: Tabs,
   tags: ["autodocs"],
+  parameters: { a11y: { test: "error" } },
 };
 export default meta;
 type Story = StoryObj<typeof Tabs>;

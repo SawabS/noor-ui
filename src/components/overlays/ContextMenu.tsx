@@ -1,21 +1,31 @@
 import * as React from "react";
 import * as RadixContextMenu from "@radix-ui/react-context-menu";
 import { cn } from "../../utilities/cn";
+import type { OverlaySurfaceVariant } from "../../foundations/types";
+import { getOverlaySurfaceClassName } from "../../utilities/surface";
+import { useAppearancePortalContainer } from "../../providers/appearance-provider";
 
 export const ContextMenuPrimitive = RadixContextMenu;
 
 export interface ContextMenuProps {
   trigger: React.ReactNode;
   children: React.ReactNode;
+  surface?: OverlaySurfaceVariant;
 }
 
 /** Right-click / long-press menu. Same visual language as DropdownMenu. */
-export function ContextMenu({ trigger, children }: ContextMenuProps) {
+export function ContextMenu({ trigger, children, surface = "auto" }: ContextMenuProps) {
+  const portalContainer = useAppearancePortalContainer();
   return (
     <RadixContextMenu.Root>
       <RadixContextMenu.Trigger asChild>{trigger}</RadixContextMenu.Trigger>
-      <RadixContextMenu.Portal>
-        <RadixContextMenu.Content className="z-dropdown min-w-40 rounded-md border border-border bg-surface py-1 shadow-md animate-fade-in motion-reduce:animate-none">
+      <RadixContextMenu.Portal container={portalContainer}>
+        <RadixContextMenu.Content
+          className={cn(
+            "z-dropdown min-w-40 rounded-md border border-border py-1 shadow-md animate-fade-in motion-reduce:animate-none",
+            getOverlaySurfaceClassName(surface),
+          )}
+        >
           {children}
         </RadixContextMenu.Content>
       </RadixContextMenu.Portal>

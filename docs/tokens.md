@@ -5,67 +5,89 @@ lookup - if the two disagree, the CSS wins.
 
 ## Color - light theme
 
-| Token | Variable | Value |
-|---|---|---|
-| canvas | `--n-canvas` | `#FFFFFF` |
-| sidebar | `--n-sidebar` | `#F7F7F7` |
-| surface | `--n-surface` | `#FFFFFF` |
-| surface-raised | `--n-surface-raised` | `#F4F4F4` |
-| surface-hover | `--n-surface-hover` | `#EEEEEE` |
-| surface-active | `--n-surface-active` | `#E7E7E7` |
-| text-primary | `--n-text-primary` | `#171717` |
-| text-secondary | `--n-text-secondary` | `#666666` |
-| text-muted | `--n-text-muted` | `#929292` |
-| border | `--n-border` | `#E5E5E5` |
-| border-strong | `--n-border-strong` | `#D4D4D4` |
-| primary-action | `--n-primary-action` | `#171717` |
+| Token               | Variable                  | Value     |
+| ------------------- | ------------------------- | --------- |
+| canvas              | `--n-canvas`              | `#FFFFFF` |
+| sidebar             | `--n-sidebar`             | `#F7F7F7` |
+| surface             | `--n-surface`             | `#FFFFFF` |
+| surface-raised      | `--n-surface-raised`      | `#F4F4F4` |
+| surface-hover       | `--n-surface-hover`       | `#EEEEEE` |
+| surface-active      | `--n-surface-active`      | `#E7E7E7` |
+| text-primary        | `--n-text-primary`        | `#171717` |
+| text-secondary      | `--n-text-secondary`      | `#666666` |
+| text-muted          | `--n-text-muted`          | `#929292` |
+| border              | `--n-border`              | `#E5E5E5` |
+| border-strong       | `--n-border-strong`       | `#D4D4D4` |
+| primary-action      | `--n-primary-action`      | `#171717` |
 | primary-action-text | `--n-primary-action-text` | `#FFFFFF` |
-| focus-ring | `--n-focus-ring` | `#737373` |
+| focus-ring          | `--n-focus-ring`          | `#737373` |
 
 ## Color - dark theme
 
-| Token | Variable | Value |
-|---|---|---|
-| canvas | `--n-canvas` | `#0D0D0D` |
-| sidebar | `--n-sidebar` | `#151515` |
-| surface | `--n-surface` | `#191919` |
-| surface-raised | `--n-surface-raised` | `#202020` |
-| surface-hover | `--n-surface-hover` | `#292929` |
-| surface-active | `--n-surface-active` | `#303030` |
-| text-primary | `--n-text-primary` | `#F2F2F2` |
-| text-secondary | `--n-text-secondary` | `#A3A3A3` |
-| text-muted | `--n-text-muted` | `#707070` |
-| border | `--n-border` | `#303030` |
-| border-strong | `--n-border-strong` | `#424242` |
-| primary-action | `--n-primary-action` | `#F2F2F2` |
+| Token               | Variable                  | Value     |
+| ------------------- | ------------------------- | --------- |
+| canvas              | `--n-canvas`              | `#0D0D0D` |
+| sidebar             | `--n-sidebar`             | `#151515` |
+| surface             | `--n-surface`             | `#191919` |
+| surface-raised      | `--n-surface-raised`      | `#202020` |
+| surface-hover       | `--n-surface-hover`       | `#292929` |
+| surface-active      | `--n-surface-active`      | `#303030` |
+| text-primary        | `--n-text-primary`        | `#F2F2F2` |
+| text-secondary      | `--n-text-secondary`      | `#A3A3A3` |
+| text-muted          | `--n-text-muted`          | `#707070` |
+| border              | `--n-border`              | `#303030` |
+| border-strong       | `--n-border-strong`       | `#424242` |
+| primary-action      | `--n-primary-action`      | `#F2F2F2` |
 | primary-action-text | `--n-primary-action-text` | `#111111` |
-| focus-ring | `--n-focus-ring` | `#A3A3A3` |
+| focus-ring          | `--n-focus-ring`          | `#A3A3A3` |
 
 ## Supporting semantic colors (theme-independent hue)
 
-| Token | Value |
-|---|---|
+| Token   | Value     |
+| ------- | --------- |
 | success | `#16A36A` |
 | warning | `#D98B18` |
-| danger | `#DC4C4C` |
-| info | `#4385F5` |
+| danger  | `#DC4C4C` |
+| info    | `#4385F5` |
 
 Each also has a soft tonal `-bg` variant (e.g. `--n-success-bg`) for alert
 and badge backgrounds, defined per-theme in `semantic.css`/`themes.css`.
+`--n-danger-contrast` supplies the accessible foreground for solid danger
+controls and is calibrated per palette.
+
+## Noor Lumen appearance tokens
+
+Lumen overrides semantic appearance roles after palette resolution. Its
+focal accent is deliberately separate from `info` and the other status roles.
+
+| Role              | Variable                | Light                     | Dark-like themes         |
+| ----------------- | ----------------------- | ------------------------- | ------------------------ |
+| canvas            | `--n-atmosphere-canvas` | `#F5F8FC`                 | `#080B12`                |
+| tonal surface     | `--n-surface-tonal`     | `#EEF3F9`                 | `#101722`                |
+| material fallback | `--n-material-fallback` | `#F8FAFD`                 | `#121A25`                |
+| material fill     | `--n-material-fill`     | `rgb(255 255 255 / 0.76)` | `rgb(15 23 35 / 0.72)`   |
+| focal accent      | `--n-accent-focal`      | `#1468D8`                 | `#70AEFF`                |
+| ambient glow      | `--n-atmosphere-glow`   | `rgb(44 123 255 / 0.18)`  | `rgb(47 134 255 / 0.28)` |
+
+Material geometry uses `--n-material-blur: 20px`,
+`--n-material-blur-strong: 28px`, and
+`--n-material-saturation: 125%`. Borders, inner highlights, selection, and
+fallback behavior also have semantic variables listed in the typed
+`appearanceTokens` manifest.
 
 ## Typography scale
 
-| Variant | Size | Line height |
-|---|---|---|
-| caption | 11px | 16px |
-| label | 12px | 18px |
-| body-sm | 13px | 22px |
-| body | 15px | 26px |
-| body-lg | 17px | 28px |
-| heading-sm | 20px | 28px |
-| heading-md | 24px | 34px |
-| heading-lg | 30px | 40px |
-| display | 40px | 52px |
+| Variant    | Size | Line height |
+| ---------- | ---- | ----------- |
+| caption    | 11px | 16px        |
+| label      | 12px | 18px        |
+| body-sm    | 13px | 22px        |
+| body       | 15px | 26px        |
+| body-lg    | 17px | 28px        |
+| heading-sm | 20px | 28px        |
+| heading-md | 24px | 34px        |
+| heading-lg | 30px | 40px        |
+| display    | 40px | 52px        |
 
 Font stack: `"IBM Plex Sans", "IBM Plex Sans Arabic", "Noto Sans Arabic", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`.
 Weights: regular 400, medium 500, semibold 600, bold 700.
@@ -85,6 +107,8 @@ Weights: regular 400, medium 500, semibold 600, bold 700.
 - **Opacity** - disabled 0.45, muted 0.7.
 - **Control heights** - sm 32px, md 40px, lg 48px.
 - **Content widths** - sm 640px, md 768px, lg 896px, xl 1152px.
+- **Component geometry** - composer max-height 240px, artifact panel width
+  512px, atmosphere grid size 32px.
 - **Breakpoints** - xs 480px, sm 640px, md 768px, lg 1024px, xl 1280px, 2xl 1536px.
 
 ## Motion
@@ -92,6 +116,7 @@ Weights: regular 400, medium 500, semibold 600, bold 700.
 - **Durations** - instant 80ms, fast 120ms, base 180ms, slow 260ms.
 - **Easing** - standard `cubic-bezier(0.4,0,0.2,1)`, enter `cubic-bezier(0,0,0.2,1)`,
   exit `cubic-bezier(0.4,0,1,1)`.
+- **Distances** - xs 4px, sm 8px, md 12px; default stagger 40ms.
 - `prefers-reduced-motion: reduce` collapses all animation/transition
   durations globally except on elements marked `data-motion-safe`.
 
@@ -102,7 +127,7 @@ toast 1500, tooltip 1600.
 
 ## Programmatic access
 
-`import { themeValues, typeScale, spacingScale, radiiScale, ... } from "noor-ui/tokens"`
+`import { appearanceTokens, lumenValues, themeValues, typeScale, spacingScale, radiiScale, ... } from "noor-ui/tokens"`
 mirrors this document as typed JS objects for tooling that needs to
 enumerate tokens without parsing CSS (Storybook's showcase page, design-sync
 tooling).

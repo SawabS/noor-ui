@@ -38,7 +38,9 @@ export function ReasoningBlock({
   };
 
   return (
-    <div className={cn("rounded-md border border-border bg-surface-raised", className)}>
+    <div
+      className={cn("n-agent-surface rounded-md border border-border bg-surface-raised", className)}
+    >
       <button
         type="button"
         onClick={toggle}

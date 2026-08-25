@@ -1,6 +1,9 @@
 import * as React from "react";
 import * as RadixPopover from "@radix-ui/react-popover";
 import { cn } from "../../utilities/cn";
+import type { OverlaySurfaceVariant } from "../../foundations/types";
+import { getOverlaySurfaceClassName } from "../../utilities/surface";
+import { useAppearancePortalContainer } from "../../providers/appearance-provider";
 
 export const PopoverPrimitive = RadixPopover;
 
@@ -13,6 +16,7 @@ export interface PopoverProps {
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
   className?: string;
+  surface?: OverlaySurfaceVariant;
 }
 
 export function Popover({
@@ -23,18 +27,21 @@ export function Popover({
   open,
   defaultOpen,
   onOpenChange,
+  surface = "auto",
   className,
 }: PopoverProps) {
+  const portalContainer = useAppearancePortalContainer();
   return (
     <RadixPopover.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
       <RadixPopover.Trigger asChild>{trigger}</RadixPopover.Trigger>
-      <RadixPopover.Portal>
+      <RadixPopover.Portal container={portalContainer}>
         <RadixPopover.Content
           side={side}
           align={align}
           sideOffset={8}
           className={cn(
-            "z-popover rounded-md border border-border bg-surface p-4 shadow-md",
+            "z-popover rounded-md border border-border p-4 shadow-md",
+            getOverlaySurfaceClassName(surface),
             "animate-fade-in motion-reduce:animate-none",
             "focus-visible:outline-none",
             className,

@@ -8,6 +8,7 @@ const meta: Meta<typeof CommandPalette> = {
   title: "Overlays/CommandPalette",
   component: CommandPalette,
   tags: ["autodocs"],
+  parameters: { a11y: { test: "error" } },
 };
 export default meta;
 type Story = StoryObj<typeof CommandPalette>;

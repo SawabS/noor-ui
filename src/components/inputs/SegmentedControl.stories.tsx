@@ -11,6 +11,7 @@ const meta: Meta<typeof SegmentedControl> = {
   title: "Inputs/SegmentedControl",
   component: SegmentedControl,
   tags: ["autodocs"],
+  parameters: { a11y: { test: "error" } },
   args: { options, defaultValue: "chat", "aria-label": "Mode" },
 };
 export default meta;

@@ -5,6 +5,7 @@ const meta: Meta<typeof ToolCallCard> = {
   title: "AI/ToolCallCard",
   component: ToolCallCard,
   tags: ["autodocs"],
+  parameters: { a11y: { test: "error" } },
 };
 export default meta;
 type Story = StoryObj<typeof ToolCallCard>;

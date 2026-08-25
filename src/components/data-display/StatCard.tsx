@@ -2,6 +2,7 @@ import * as React from "react";
 import { ArrowUp, ArrowDown, type LucideIcon } from "lucide-react";
 import { cn } from "../../utilities/cn";
 import { Card } from "./Card";
+import type { SurfaceVariant } from "../../foundations/types";
 
 export interface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {
   label: string;
@@ -11,11 +12,12 @@ export interface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {
     direction: "up" | "down";
     value: string;
   };
+  surface?: SurfaceVariant;
 }
 
 export const StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(
-  ({ label, value, icon: IconComponent, trend, className, ...props }, ref) => (
-    <Card ref={ref} className={cn("flex flex-col gap-3", className)} {...props}>
+  ({ label, value, icon: IconComponent, trend, surface = "solid", className, ...props }, ref) => (
+    <Card ref={ref} surface={surface} className={cn("flex flex-col gap-3", className)} {...props}>
       <div className="flex items-start justify-between">
         <span className="text-body-sm text-text-secondary">{label}</span>
         {IconComponent ? (

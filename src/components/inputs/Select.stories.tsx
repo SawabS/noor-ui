@@ -12,6 +12,7 @@ const meta: Meta<typeof Select> = {
   title: "Inputs/Select",
   component: Select,
   tags: ["autodocs"],
+  parameters: { a11y: { test: "error" } },
   args: { options, placeholder: "Choose a model" },
 };
 export default meta;

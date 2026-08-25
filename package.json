@@ -1,6 +1,6 @@
 {
   "name": "noor-ui",
-  "version": "0.1.0",
+  "version": "0.2.0-lumen.0",
   "description": "A restrained, monochromatic React design system for AI products. Multilingual (EN/KU/AR), full RTL support, WCAG 2.2 AA.",
   "type": "module",
   "license": "MIT",
@@ -42,7 +42,9 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,css,md}\"",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:visual": "playwright test",
+    "test:visual:update": "playwright test --update-snapshots=all"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
@@ -75,6 +77,8 @@
     "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.55.0",
     "@storybook/addon-a11y": "^8.4.7",
     "@storybook/addon-essentials": "^8.4.7",
     "@storybook/addon-interactions": "^8.4.7",

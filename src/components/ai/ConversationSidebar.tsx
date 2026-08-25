@@ -46,8 +46,9 @@ export function ConversationSidebar({
   if (collapsed) {
     return (
       <aside
+        aria-label="Conversation history"
         className={cn(
-          "flex h-full w-16 flex-col items-center gap-2 border-e border-border bg-sidebar py-3",
+          "n-lumen-shell flex h-full w-16 flex-col items-center gap-2 border-e border-border bg-sidebar py-3",
           "transition-[width] duration-base ease-standard motion-reduce:transition-none",
           className,
         )}
@@ -69,8 +70,9 @@ export function ConversationSidebar({
 
   return (
     <aside
+      aria-label="Conversation history"
       className={cn(
-        "flex h-full w-64 flex-col border-e border-border bg-sidebar",
+        "n-lumen-shell flex h-full w-64 flex-col border-e border-border bg-sidebar",
         "transition-[width] duration-base ease-standard motion-reduce:transition-none",
         className,
       )}

@@ -8,7 +8,7 @@ const meta: Meta<typeof WelcomeScreen> = {
   title: "AI/WelcomeScreen",
   component: WelcomeScreen,
   tags: ["autodocs"],
-  parameters: { layout: "fullscreen" },
+  parameters: { layout: "fullscreen", a11y: { test: "error" } },
 };
 export default meta;
 type Story = StoryObj<typeof WelcomeScreen>;
@@ -48,4 +48,9 @@ function DefaultWelcomeScreen() {
 
 export const Default: Story = {
   render: () => <DefaultWelcomeScreen />,
+};
+
+export const Lumen: Story = {
+  render: () => <DefaultWelcomeScreen />,
+  globals: { appearance: "lumen", theme: "dark" },
 };

@@ -25,11 +25,11 @@ export function WelcomeScreen({
   return (
     <div
       className={cn(
-        "mx-auto flex w-full max-w-content-md flex-1 flex-col justify-center px-4 py-12",
+        "n-atmosphere mx-auto flex w-full max-w-content-md flex-1 flex-col justify-center px-4 py-12",
         className,
       )}
     >
-      <div className="mb-8 text-center">
+      <div className="relative mb-8 text-center">
         <Typography variant="heading-lg" as="h1">
           {greeting}
         </Typography>
@@ -40,10 +40,10 @@ export function WelcomeScreen({
         )}
       </div>
 
-      {composer && <div className="mb-6">{composer}</div>}
+      {composer && <div className="relative mb-6">{composer}</div>}
 
       {suggestedPrompts && suggestedPrompts.length > 0 && (
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <div className="relative grid grid-cols-1 gap-2 sm:grid-cols-2">
           {suggestedPrompts.map((prompt, i) => (
             <SuggestedPrompt key={i} {...prompt} />
           ))}

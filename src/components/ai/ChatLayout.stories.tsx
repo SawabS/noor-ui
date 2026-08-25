@@ -13,7 +13,7 @@ const meta: Meta<typeof ChatLayout> = {
   title: "AI/ChatLayout",
   component: ChatLayout,
   tags: ["autodocs"],
-  parameters: { layout: "fullscreen" },
+  parameters: { layout: "fullscreen", a11y: { test: "error" } },
 };
 export default meta;
 type Story = StoryObj<typeof ChatLayout>;
@@ -51,4 +51,14 @@ function DefaultChatLayout() {
 
 export const Default: Story = {
   render: () => <DefaultChatLayout />,
+};
+
+export const LumenDark: Story = {
+  render: () => <DefaultChatLayout />,
+  globals: { appearance: "lumen", theme: "dark" },
+};
+
+export const LumenSoraniRTL: Story = {
+  render: () => <DefaultChatLayout />,
+  globals: { appearance: "lumen", theme: "light", direction: "rtl" },
 };

@@ -6,6 +6,7 @@ const meta: Meta<typeof StatCard> = {
   title: "DataDisplay/StatCard",
   component: StatCard,
   tags: ["autodocs"],
+  parameters: { a11y: { test: "error" } },
 };
 export default meta;
 type Story = StoryObj<typeof StatCard>;

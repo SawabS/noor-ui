@@ -6,6 +6,8 @@ import { CheckCircle2, AlertTriangle, AlertCircle, Info, X } from "lucide-react"
 import { cn } from "../../utilities/cn";
 import { Icon } from "../primitives/Icon";
 import { IconButton } from "../inputs/IconButton";
+import type { OverlaySurfaceVariant } from "../../foundations/types";
+import { getOverlaySurfaceClassName } from "../../utilities/surface";
 
 export type ToastVariant = "neutral" | "success" | "warning" | "danger";
 
@@ -32,7 +34,7 @@ export function useToast(): ToastContextValue {
 }
 
 const toastVariants = cva(
-  "pointer-events-auto flex w-full items-start gap-3 rounded-md border border-border bg-surface p-4 shadow-lg",
+  "pointer-events-auto flex w-full items-start gap-3 rounded-md border border-border p-4 shadow-lg",
   {
     variants: {
       variant: {
@@ -55,13 +57,14 @@ const iconFor: Record<ToastVariant, typeof Info> = {
 
 export interface ToastProviderProps {
   children: React.ReactNode;
+  surface?: OverlaySurfaceVariant;
 }
 
 /**
  * Mount <ToastProvider> once near the app root. Descendants call
  * useToast().toast({...}) to enqueue a notification.
  */
-export function ToastProvider({ children }: ToastProviderProps) {
+export function ToastProvider({ children, surface = "auto" }: ToastProviderProps) {
   const [toasts, setToasts] = React.useState<ToastItem[]>([]);
   const dir = useRadixDirection();
 
@@ -93,6 +96,7 @@ export function ToastProvider({ children }: ToastProviderProps) {
             }}
             className={cn(
               toastVariants({ variant }),
+              getOverlaySurfaceClassName(surface),
               "data-[state=open]:animate-slide-in-from-bottom data-[state=closed]:animate-fade-out",
               "motion-reduce:data-[state=open]:animate-none motion-reduce:data-[state=closed]:animate-none",
               "data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)]",

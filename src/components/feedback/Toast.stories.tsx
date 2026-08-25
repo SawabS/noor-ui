@@ -5,6 +5,7 @@ import { Button } from "../inputs/Button";
 const meta: Meta = {
   title: "Feedback/Toast",
   tags: ["autodocs"],
+  parameters: { a11y: { test: "error" } },
   decorators: [
     (Story) => (
       <ToastProvider>

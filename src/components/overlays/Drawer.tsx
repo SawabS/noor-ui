@@ -4,6 +4,9 @@ import { X } from "lucide-react";
 import { cn } from "../../utilities/cn";
 import { IconButton } from "../inputs/IconButton";
 import { useDirection } from "../../providers/direction-provider";
+import type { OverlaySurfaceVariant } from "../../foundations/types";
+import { getOverlaySurfaceClassName } from "../../utilities/surface";
+import { useAppearancePortalContainer } from "../../providers/appearance-provider";
 
 export type DrawerSide = "start" | "end" | "top" | "bottom";
 
@@ -17,6 +20,7 @@ export interface DrawerProps {
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
   className?: string;
+  surface?: OverlaySurfaceVariant;
 }
 
 const sidePosition: Record<DrawerSide, string> = {
@@ -40,9 +44,11 @@ export function Drawer({
   open,
   defaultOpen,
   onOpenChange,
+  surface = "auto",
   className,
 }: DrawerProps) {
   const { direction } = useDirection();
+  const portalContainer = useAppearancePortalContainer();
 
   const animationClass = React.useMemo(() => {
     if (side === "top") return "animate-drawer-in-top";
@@ -55,11 +61,12 @@ export function Drawer({
   return (
     <RadixDialog.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
       {trigger && <RadixDialog.Trigger asChild>{trigger}</RadixDialog.Trigger>}
-      <RadixDialog.Portal>
+      <RadixDialog.Portal container={portalContainer}>
         <RadixDialog.Overlay className="fixed inset-0 z-overlay bg-[rgb(var(--n-shadow-color)/0.4)] animate-fade-in motion-reduce:animate-none" />
         <RadixDialog.Content
           className={cn(
-            "fixed z-modal flex flex-col bg-surface border border-border shadow-lg p-6",
+            "fixed z-modal flex flex-col border border-border shadow-lg p-6",
+            getOverlaySurfaceClassName(surface),
             "motion-reduce:animate-none focus-visible:outline-none",
             sidePosition[side],
             animationClass,

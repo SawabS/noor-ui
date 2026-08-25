@@ -1,6 +1,5 @@
 import * as React from "react";
 import { ChatLayout } from "../components/ai/ChatLayout";
-import { ConversationSidebar } from "../components/ai/ConversationSidebar";
 import { MessageList } from "../components/ai/MessageList";
 import { UserMessage } from "../components/ai/UserMessage";
 import { AssistantMessage } from "../components/ai/AssistantMessage";
@@ -13,6 +12,14 @@ import { AttachmentChip } from "../components/ai/AttachmentChip";
 import { TopNavigation } from "../components/navigation/TopNavigation";
 import { UserMenu } from "../components/navigation/UserMenu";
 import { ThemeToggle } from "../components/primitives/ThemeToggle";
+import {
+  DesktopConversationSidebar,
+  MobileConversationDrawer,
+} from "./ResponsiveConversationSidebar";
+
+const activeConversationGroups = [
+  { label: "Today", items: [{ id: "1", title: "Comparing hosting providers" }] },
+];
 
 /** Screen 2: an active chat with a user turn, tool use, and a streaming assistant reply. */
 export function ActiveChatExample() {
@@ -22,8 +29,8 @@ export function ActiveChatExample() {
   return (
     <ChatLayout
       sidebar={
-        <ConversationSidebar
-          groups={[{ label: "Today", items: [{ id: "1", title: "Comparing hosting providers" }] }]}
+        <DesktopConversationSidebar
+          groups={activeConversationGroups}
           activeId="1"
           onNewConversation={() => {}}
         />
@@ -31,9 +38,16 @@ export function ActiveChatExample() {
       topNavigation={
         <TopNavigation
           start={
-            <span className="text-body-sm font-medium text-text-primary">
-              Comparing hosting providers
-            </span>
+            <>
+              <MobileConversationDrawer
+                groups={activeConversationGroups}
+                activeId="1"
+                onNewConversation={() => {}}
+              />
+              <span className="truncate text-body-sm font-medium text-text-primary">
+                Comparing hosting providers
+              </span>
+            </>
           }
           end={
             <>

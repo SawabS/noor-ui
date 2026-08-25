@@ -11,6 +11,13 @@
   --n-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
   --n-ease-enter: cubic-bezier(0, 0, 0.2, 1);
   --n-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+
+  /* Spatial distances are independent from duration so reduced-motion
+     modes can collapse travel without changing component geometry. */
+  --n-motion-distance-xs: 0.25rem;
+  --n-motion-distance-sm: 0.5rem;
+  --n-motion-distance-md: 0.75rem;
+  --n-motion-stagger: 40ms;
 }
 
 /* Global reduced-motion contract. Components that animate should also add

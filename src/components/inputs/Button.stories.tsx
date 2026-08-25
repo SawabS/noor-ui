@@ -7,6 +7,7 @@ const meta: Meta<typeof Button> = {
   title: "Inputs/Button",
   component: Button,
   tags: ["autodocs"],
+  parameters: { a11y: { test: "error" } },
   args: { children: "Continue" },
   argTypes: {
     variant: {

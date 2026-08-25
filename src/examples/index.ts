@@ -3,3 +3,4 @@ export { ActiveChatExample } from "./ActiveChatExample";
 export { ResearchTaskExample } from "./ResearchTaskExample";
 export { SettingsPageExample } from "./SettingsPageExample";
 export { DesignSystemShowcase } from "./DesignSystemShowcase";
+export { LumenWorkspaceExample } from "./LumenWorkspaceExample";

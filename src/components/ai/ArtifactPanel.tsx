@@ -24,16 +24,19 @@ export function ArtifactPanel({
   actions,
   className,
 }: ArtifactPanelProps) {
+  const titleId = React.useId();
+
   return (
     <aside
+      aria-labelledby={titleId}
       className={cn(
-        "flex h-full w-full max-w-xl shrink-0 flex-col border-s border-border bg-surface sm:w-[32rem]",
+        "n-lumen-shell flex h-full w-full max-w-xl shrink-0 flex-col border-s border-border bg-surface sm:w-artifact",
         className,
       )}
     >
       <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-3">
         <div className="min-w-0">
-          <Typography variant="body-sm" weight="semibold" truncate>
+          <Typography id={titleId} variant="body-sm" weight="semibold" truncate>
             {title}
           </Typography>
           {subtitle && (

@@ -6,6 +6,7 @@ const meta: Meta<typeof Input> = {
   title: "Inputs/Input",
   component: Input,
   tags: ["autodocs"],
+  parameters: { a11y: { test: "error" } },
   args: { placeholder: "Ask anything" },
   argTypes: { size: { control: "select", options: ["sm", "md", "lg"] } },
 };

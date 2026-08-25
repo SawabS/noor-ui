@@ -24,7 +24,51 @@ export const colorTokens = {
   success: "--n-success",
   warning: "--n-warning",
   danger: "--n-danger",
+  dangerContrast: "--n-danger-contrast",
   info: "--n-info",
+} as const;
+
+export const appearanceTokens = {
+  atmosphereCanvas: "--n-atmosphere-canvas",
+  atmosphereGlow: "--n-atmosphere-glow",
+  atmosphereGrid: "--n-atmosphere-grid",
+  accentFocal: "--n-accent-focal",
+  accentFocalText: "--n-accent-focal-text",
+  accentGlow: "--n-accent-glow",
+  surfaceTonal: "--n-surface-tonal",
+  surfaceElevated: "--n-surface-elevated",
+  materialFallback: "--n-material-fallback",
+  materialFill: "--n-material-fill",
+  materialFillStrong: "--n-material-fill-strong",
+  materialBorder: "--n-material-border",
+  materialHighlight: "--n-material-highlight",
+  materialBlur: "--n-material-blur",
+  materialBlurStrong: "--n-material-blur-strong",
+  materialSaturation: "--n-material-saturation",
+} as const;
+
+export const lumenValues = {
+  light: {
+    canvas: "#F5F8FC",
+    tonal: "#EEF3F9",
+    materialFallback: "#F8FAFD",
+    materialFill: "rgb(255 255 255 / 0.76)",
+    focalAccent: "#1468D8",
+    glow: "rgb(44 123 255 / 0.18)",
+  },
+  dark: {
+    canvas: "#080B12",
+    tonal: "#101722",
+    materialFallback: "#121A25",
+    materialFill: "rgb(15 23 35 / 0.72)",
+    focalAccent: "#70AEFF",
+    glow: "rgb(47 134 255 / 0.28)",
+  },
+  material: {
+    blur: "20px",
+    blurStrong: "28px",
+    saturation: "125%",
+  },
 } as const;
 
 export const themeValues = {
@@ -219,6 +263,13 @@ export const motionDurations = {
   slow: "260ms",
 } as const;
 
+export const motionDistances = {
+  xs: "0.25rem",
+  sm: "0.5rem",
+  md: "0.75rem",
+  stagger: "40ms",
+} as const;
+
 export const zIndexLayers = {
   dropdown: 1000,
   sticky: 1100,
@@ -240,6 +291,12 @@ export const contentWidths = {
   md: "768px",
   lg: "896px",
   xl: "1152px",
+} as const;
+
+export const componentDimensions = {
+  composerMaxHeight: "15rem",
+  artifactPanelWidth: "32rem",
+  atmosphereGridSize: "2rem",
 } as const;
 
 export const breakpoints = {

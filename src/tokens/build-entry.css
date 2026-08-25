@@ -1,6 +1,7 @@
 @import "./primitive.css";
 @import "./semantic.css";
 @import "./themes.css";
+@import "./appearance.css";
 @import "./typography.css";
 @import "./spacing.css";
 @import "./motion.css";
@@ -20,8 +21,8 @@
   }
 
   ::selection {
-    background-color: var(--n-text-primary);
-    color: var(--n-canvas);
+    background-color: var(--n-selection-background);
+    color: var(--n-selection-text);
   }
 
   :focus-visible {

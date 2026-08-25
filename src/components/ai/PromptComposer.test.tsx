@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import * as React from "react";
 import { PromptComposer } from "./PromptComposer";
@@ -76,5 +76,51 @@ describe("PromptComposer", () => {
   it("disables the whole composer when disabled is set", () => {
     render(<ControlledComposer value="hi" disabled />);
     expect(screen.getByRole("textbox", { name: "Message" })).toBeDisabled();
+  });
+
+  it("does not submit while an IME composition is active", () => {
+    const onSubmit = vi.fn();
+    render(<ControlledComposer value="مرحبا" onSubmit={onSubmit} />);
+    const textbox = screen.getByRole("textbox", { name: "Message" });
+
+    fireEvent.compositionStart(textbox);
+    fireEvent.keyDown(textbox, { key: "Enter" });
+    expect(onSubmit).not.toHaveBeenCalled();
+
+    fireEvent.compositionEnd(textbox);
+    fireEvent.keyDown(textbox, { key: "Enter" });
+    expect(onSubmit).toHaveBeenCalledWith("مرحبا");
+  });
+
+  it("exposes distinct busy controls across loading and streaming transitions", () => {
+    const onStop = vi.fn();
+    const { rerender } = render(
+      <PromptComposer value="hello" onValueChange={() => {}} onSubmit={() => {}} loading />,
+    );
+    expect(screen.getByRole("textbox", { name: "Message" })).toBeDisabled();
+    expect(screen.getByRole("textbox", { name: "Message" }).parentElement).toHaveAttribute(
+      "data-state",
+      "loading",
+    );
+    expect(screen.getByRole("button", { name: "Send message" })).toHaveAttribute(
+      "aria-busy",
+      "true",
+    );
+
+    rerender(
+      <PromptComposer
+        value="hello"
+        onValueChange={() => {}}
+        onSubmit={() => {}}
+        streaming
+        onStop={onStop}
+      />,
+    );
+    expect(screen.getByRole("button", { name: "Stop generating" })).toBeEnabled();
+    expect(screen.getByRole("textbox", { name: "Message" }).parentElement).toHaveAttribute(
+      "data-state",
+      "streaming",
+    );
+    expect(screen.queryByRole("button", { name: "Send message" })).not.toBeInTheDocument();
   });
 });

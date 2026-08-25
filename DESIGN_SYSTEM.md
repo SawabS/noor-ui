@@ -2,10 +2,11 @@
 
 ## Principles
 
-1. **Restraint over decoration.** Large areas of negative space, low visual
-   noise, neutral surfaces. Color is used to communicate state (success,
-   warning, danger, info), never as brand decoration. No saturated blue as a
-   dominant color, no gratuitous gradients or glassmorphism.
+1. **Restraint is the default.** The classic Noor appearance keeps large areas
+   of negative space, low visual noise, neutral surfaces, and status-driven
+   color. Noor Lumen is an explicit alternative profile: it adds a separate
+   focal accent, one static atmospheric glow, and selected material surfaces
+   without changing the default rendering.
 2. **Tonal hierarchy, not heavy shadows.** Elevation is expressed mostly
    through background tone steps (`canvas` → `surface` → `surface-raised` →
    `surface-hover` → `surface-active`) and thin borders. Shadows exist
@@ -31,6 +32,10 @@
    UI where interaction logic is non-trivial (dialogs, menus, tooltips,
    selects, tabs, accordions), inheriting correct focus management, keyboard
    navigation and ARIA wiring rather than reimplementing it.
+8. **Material has a job.** Under Lumen, translucency is reserved for app
+   chrome, transient overlays, and the flagship composer. Dense content,
+   agent status, code, and tables stay solid or tonal. Every material surface
+   has an opaque fallback and respects reduced transparency and forced colors.
 
 ## Token reference (summary)
 
@@ -39,7 +44,8 @@ truth is always `src/tokens/*.css`.
 
 - **Color** - `src/tokens/primitive.css` (raw ramp) →
   `src/tokens/semantic.css` (light defaults) → `src/tokens/themes.css`
-  (dark + system overrides). Components only ever import semantic names:
+  (palette overrides) → `src/tokens/appearance.css` (opt-in appearance
+  overrides and recipes). Components only ever import semantic names:
   `canvas`, `sidebar`, `surface`/`surface-raised`/`surface-hover`/`surface-active`,
   `text-primary`/`text-secondary`/`text-muted`, `border`/`border-strong`,
   `primary-action`/`primary-action-text`, `focus-ring`,
@@ -62,7 +68,8 @@ truth is always `src/tokens/*.css`.
 ## Component inventory
 
 **Foundations** - `ThemeProvider`, `DirectionProvider`, `ThemeToggle`,
-`Typography`, `Icon`, `VisuallyHidden`, `Separator`, `Skeleton`, `Spinner`
+`AppearanceProvider`, `Typography`, `Icon`, `VisuallyHidden`, `Separator`,
+`Skeleton`, `Spinner`
 
 **Inputs** - `Button`, `IconButton`, `Input`, `Textarea`, `SearchInput`,
 `Select`, `Checkbox`, `RadioGroup`, `Switch`, `Slider`, `FormField`, `Label`,
@@ -98,7 +105,8 @@ never a heavy drop shadow) and a subtle border rather than a loud outline.
 
 ## What this system deliberately avoids
 
-No large drop shadows, no glassmorphism/blur panels, no gradients as
-decoration, no blue-as-brand, no pill-shaping everything, no dense
-dashboard-style compression - spacing stays generous even in data-heavy
-views like tables and stat grids.
+Classic Noor avoids large drop shadows, glass/blur panels, decorative
+gradients, blue-as-brand, pill-shaping everything, and dense dashboard-style
+compression. Lumen selectively relaxes only the blur and focal-accent rules;
+it still avoids blur on every card, animated particles, parallax, neon
+outlines, low-contrast translucent content, and full-viewport blur.

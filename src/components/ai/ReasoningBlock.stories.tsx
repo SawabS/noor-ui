@@ -5,6 +5,7 @@ const meta: Meta<typeof ReasoningBlock> = {
   title: "AI/ReasoningBlock",
   component: ReasoningBlock,
   tags: ["autodocs"],
+  parameters: { a11y: { test: "error" } },
 };
 export default meta;
 type Story = StoryObj<typeof ReasoningBlock>;

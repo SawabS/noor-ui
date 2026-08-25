@@ -6,6 +6,7 @@ const meta: Meta<typeof Card> = {
   title: "DataDisplay/Card",
   component: Card,
   tags: ["autodocs"],
+  parameters: { a11y: { test: "error" } },
 };
 export default meta;
 type Story = StoryObj<typeof Card>;
@@ -39,4 +40,18 @@ export const Interactive: Story = {
       <CardDescription>Interactive cards show a subtle border and shadow on hover.</CardDescription>
     </Card>
   ),
+};
+
+export const LumenSurfaces: Story = {
+  render: () => (
+    <div className="grid max-w-content-lg gap-4 sm:grid-cols-2">
+      {(["solid", "tonal", "material", "elevated"] as const).map((surface) => (
+        <Card key={surface} surface={surface}>
+          <CardTitle className="capitalize">{surface}</CardTitle>
+          <CardDescription>Semantic {surface} surface under Noor Lumen.</CardDescription>
+        </Card>
+      ))}
+    </div>
+  ),
+  globals: { appearance: "lumen", theme: "dark" },
 };

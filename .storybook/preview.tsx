@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import "../src/tokens/build-entry.css";
 import { ThemeProvider, themeOptions } from "../src/providers/theme-provider";
 import { DirectionProvider } from "../src/providers/direction-provider";
+import { AppearanceProvider } from "../src/providers/appearance-provider";
 
 const preview: Preview = {
   parameters: {
@@ -35,24 +36,51 @@ const preview: Preview = {
         dynamicTitle: true,
       },
     },
+    appearance: {
+      description: "Appearance profile",
+      defaultValue: "default",
+      toolbar: {
+        title: "Appearance",
+        icon: "paintbrush",
+        items: [
+          { value: "default", title: "Default Noor" },
+          { value: "lumen", title: "Noor Lumen" },
+        ],
+        dynamicTitle: true,
+      },
+    },
+    transparency: {
+      description: "Transparency preference",
+      defaultValue: "system",
+      toolbar: {
+        title: "Transparency",
+        icon: "contrast",
+        items: [
+          { value: "system", title: "System preference" },
+          { value: "reduce", title: "Reduce transparency" },
+        ],
+        dynamicTitle: true,
+      },
+    },
   },
   decorators: [
     (Story, context) => {
-      const { theme, direction } = context.globals;
+      const { theme, direction, appearance, transparency } = context.globals;
       useEffect(() => {
         document.body.style.margin = "0";
       }, []);
       return (
         <ThemeProvider theme={theme} scope="scoped">
-          <DirectionProvider direction={direction} applyToDocument={false}>
-            <div
-              dir={direction}
-              className="bg-canvas text-text-primary font-sans min-h-screen"
-              style={{ padding: "1.5rem" }}
-            >
-              <Story />
-            </div>
-          </DirectionProvider>
+          <AppearanceProvider appearance={appearance} transparency={transparency} scope="scoped">
+            <DirectionProvider direction={direction} applyToDocument={false}>
+              <div
+                dir={direction}
+                className="min-h-screen bg-canvas p-6 font-sans text-text-primary"
+              >
+                <Story />
+              </div>
+            </DirectionProvider>
+          </AppearanceProvider>
         </ThemeProvider>
       );
     },

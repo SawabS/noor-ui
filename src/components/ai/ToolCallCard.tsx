@@ -40,7 +40,7 @@ export function ToolCallCard({
   const hasDetail = args !== undefined || result !== undefined;
 
   return (
-    <div className={cn("rounded-md border border-border bg-surface", className)}>
+    <div className={cn("n-agent-surface rounded-md border border-border bg-surface", className)}>
       <button
         type="button"
         onClick={() => hasDetail && setOpen((o) => !o)}
@@ -80,7 +80,7 @@ export function ToolCallCard({
         <div id={contentId} hidden={!open} className="space-y-2 border-t border-border px-3 py-2">
           {args !== undefined ? (
             <div>
-              <Typography variant="caption" color="muted" className="uppercase tracking-wide">
+              <Typography variant="caption" color="secondary" className="uppercase tracking-wide">
                 Arguments
               </Typography>
               <pre className="mt-1 overflow-x-auto rounded-sm bg-surface-raised p-2 text-caption font-mono text-text-secondary">
@@ -90,7 +90,7 @@ export function ToolCallCard({
           ) : null}
           {result !== undefined ? (
             <div>
-              <Typography variant="caption" color="muted" className="uppercase tracking-wide">
+              <Typography variant="caption" color="secondary" className="uppercase tracking-wide">
                 Result
               </Typography>
               <div className="mt-1 text-body-sm text-text-secondary">{result}</div>

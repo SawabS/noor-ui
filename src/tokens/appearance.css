@@ -1,0 +1,273 @@
+/**
+ * Noor Lumen appearance profile.
+ *
+ * Appearance is independent from theme. The light calibration is the
+ * fallback; dark-like named themes opt into the dark calibration below.
+ * All material recipes are fallback-first and become translucent only when
+ * the browser and the user's transparency preference allow it.
+ */
+[data-noor-appearance="lumen"] {
+  --n-canvas: #f5f8fc;
+  --n-sidebar: #eef3f9;
+  --n-surface: #f8fafd;
+  --n-surface-raised: #eef3f9;
+  --n-surface-hover: #e7edf6;
+  --n-surface-active: #dde7f3;
+  --n-atmosphere-canvas: #f5f8fc;
+  --n-atmosphere-glow: rgb(44 123 255 / 0.18);
+  --n-atmosphere-grid: rgb(20 104 216 / 0.07);
+  --n-accent-focal: #1468d8;
+  --n-accent-focal-text: #ffffff;
+  --n-accent-glow: rgb(44 123 255 / 0.18);
+  --n-surface-tonal: #eef3f9;
+  --n-surface-elevated: #ffffff;
+  --n-material-fallback: #f8fafd;
+  --n-material-fill: rgb(255 255 255 / 0.76);
+  --n-material-fill-strong: rgb(255 255 255 / 0.88);
+  --n-material-border: rgb(21 31 45 / 0.14);
+  --n-material-highlight: rgb(255 255 255 / 0.7);
+  --n-material-blur: 20px;
+  --n-material-blur-strong: 28px;
+  --n-material-saturation: 125%;
+  --n-focus-ring: #1468d8;
+  --n-selection-background: rgb(20 104 216 / 0.2);
+  --n-selection-text: var(--n-text-primary);
+}
+
+:is(
+    [data-theme="dark"],
+    [data-theme="github-dark"],
+    [data-theme="dracula"],
+    [data-theme="one-dark-pro"],
+    [data-theme="nord"],
+    [data-theme="catppuccin-mocha"]
+  )
+  [data-noor-appearance="lumen"],
+[data-noor-appearance="lumen"]
+  :is(
+    [data-theme="dark"],
+    [data-theme="github-dark"],
+    [data-theme="dracula"],
+    [data-theme="one-dark-pro"],
+    [data-theme="nord"],
+    [data-theme="catppuccin-mocha"]
+  ),
+:is(
+  [data-theme="dark"],
+  [data-theme="github-dark"],
+  [data-theme="dracula"],
+  [data-theme="one-dark-pro"],
+  [data-theme="nord"],
+  [data-theme="catppuccin-mocha"]
+)[data-noor-appearance="lumen"] {
+  --n-canvas: #080b12;
+  --n-sidebar: #0d131d;
+  --n-surface: #121a25;
+  --n-surface-raised: #101722;
+  --n-surface-hover: #172231;
+  --n-surface-active: #1d2a3c;
+  --n-atmosphere-canvas: #080b12;
+  --n-atmosphere-glow: rgb(47 134 255 / 0.28);
+  --n-atmosphere-grid: rgb(112 174 255 / 0.08);
+  --n-accent-focal: #70aeff;
+  --n-accent-focal-text: #07101d;
+  --n-accent-glow: rgb(47 134 255 / 0.28);
+  --n-surface-tonal: #101722;
+  --n-surface-elevated: #15202e;
+  --n-material-fallback: #121a25;
+  --n-material-fill: rgb(15 23 35 / 0.72);
+  --n-material-fill-strong: rgb(15 23 35 / 0.86);
+  --n-material-border: rgb(255 255 255 / 0.12);
+  --n-material-highlight: rgb(255 255 255 / 0.08);
+  --n-material-blur: 20px;
+  --n-material-blur-strong: 28px;
+  --n-material-saturation: 125%;
+  --n-focus-ring: #70aeff;
+  --n-selection-background: rgb(112 174 255 / 0.24);
+  --n-selection-text: var(--n-text-primary);
+}
+
+.n-surface-solid {
+  background-color: var(--n-surface);
+}
+
+.n-surface-tonal {
+  background-color: var(--n-surface-tonal);
+}
+
+.n-surface-elevated {
+  background-color: var(--n-surface-elevated);
+  box-shadow: var(--n-shadow-md);
+}
+
+.n-material.n-material,
+.n-material-strong.n-material-strong {
+  background-color: var(--n-material-fallback);
+  border-color: var(--n-material-border);
+  box-shadow:
+    var(--n-shadow-md),
+    inset 0 1px 0 var(--n-material-highlight);
+}
+
+.n-material-strong.n-material-strong {
+  box-shadow:
+    var(--n-shadow-lg),
+    inset 0 1px 0 var(--n-material-highlight);
+}
+
+[data-noor-appearance="lumen"] .n-surface-auto {
+  background-color: var(--n-material-fallback);
+  border-color: var(--n-material-border);
+  box-shadow:
+    var(--n-shadow-md),
+    inset 0 1px 0 var(--n-material-highlight);
+}
+
+[data-noor-appearance="lumen"] .n-lumen-shell {
+  background-color: var(--n-material-fallback);
+  border-color: var(--n-material-border);
+  box-shadow: inset 0 1px 0 var(--n-material-highlight);
+}
+
+[data-noor-appearance="lumen"] .n-agent-surface {
+  background-color: var(--n-surface-tonal);
+  border-color: var(--n-material-border);
+  box-shadow: inset 0 1px 0 var(--n-material-highlight);
+}
+
+[data-noor-appearance="lumen"] .n-suggestion-surface {
+  background-color: color-mix(in srgb, var(--n-surface-elevated) 82%, transparent);
+  border-color: var(--n-material-border);
+  box-shadow:
+    var(--n-shadow-xs),
+    inset 0 1px 0 var(--n-material-highlight);
+}
+
+[data-noor-appearance="lumen"] .n-tooltip-auto {
+  color: var(--n-text-primary);
+  background-color: var(--n-material-fallback);
+  border: var(--n-border-width-default) solid var(--n-material-border);
+  box-shadow: var(--n-shadow-md);
+}
+
+[data-noor-appearance="lumen"] .n-tooltip-arrow {
+  fill: var(--n-material-fallback);
+}
+
+[data-noor-appearance="lumen"] .n-primary-control {
+  color: var(--n-accent-focal-text);
+  background-color: var(--n-accent-focal);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 28%, transparent),
+    0 0.5rem 1.5rem color-mix(in srgb, var(--n-accent-glow) 72%, transparent);
+}
+
+[data-noor-appearance="lumen"] .n-control {
+  border-color: var(--n-material-border);
+  box-shadow: inset 0 1px 0 var(--n-material-highlight);
+}
+
+[data-noor-appearance="lumen"] .n-segmented {
+  background-color: var(--n-surface-tonal);
+  border: var(--n-border-width-default) solid var(--n-material-border);
+  box-shadow: inset 0 1px 0 var(--n-material-highlight);
+}
+
+[data-noor-appearance="lumen"] .n-tabs [data-state="active"] {
+  color: var(--n-accent-focal);
+  border-color: var(--n-accent-focal);
+}
+
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .n-material.n-material,
+  [data-noor-appearance="lumen"] :is(.n-surface-auto, .n-lumen-shell) {
+    background-color: var(--n-material-fill);
+    -webkit-backdrop-filter: blur(var(--n-material-blur)) saturate(var(--n-material-saturation));
+    backdrop-filter: blur(var(--n-material-blur)) saturate(var(--n-material-saturation));
+  }
+
+  .n-material-strong.n-material-strong {
+    background-color: var(--n-material-fill-strong);
+    -webkit-backdrop-filter: blur(var(--n-material-blur-strong))
+      saturate(var(--n-material-saturation));
+    backdrop-filter: blur(var(--n-material-blur-strong)) saturate(var(--n-material-saturation));
+  }
+}
+
+.n-atmosphere {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--n-atmosphere-canvas);
+}
+
+.n-atmosphere::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  content: "";
+  background-image:
+    radial-gradient(circle at 50% 8%, var(--n-atmosphere-glow), transparent 46%),
+    linear-gradient(var(--n-atmosphere-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--n-atmosphere-grid) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    var(--n-atmosphere-grid-size) var(--n-atmosphere-grid-size),
+    var(--n-atmosphere-grid-size) var(--n-atmosphere-grid-size);
+  mask-image: linear-gradient(to bottom, black, transparent 78%);
+}
+
+[data-noor-appearance="lumen"] .n-focus-glow:focus-within {
+  border-color: color-mix(in srgb, var(--n-accent-focal) 44%, transparent);
+  box-shadow:
+    var(--n-shadow-md),
+    0 0 0 1px color-mix(in srgb, var(--n-accent-focal) 18%, transparent),
+    0 0 2rem var(--n-accent-glow);
+}
+
+[data-noor-appearance="lumen"] .n-focus-glow[data-state="loading"],
+[data-noor-appearance="lumen"] .n-focus-glow[data-state="streaming"] {
+  border-color: color-mix(in srgb, var(--n-accent-focal) 28%, var(--n-material-border));
+  box-shadow:
+    var(--n-shadow-sm),
+    inset 0 1px 0 var(--n-material-highlight);
+}
+
+[data-noor-transparency="reduce"] :is(.n-material, .n-material-strong, .n-surface-auto) {
+  background-color: var(--n-material-fallback);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+[data-noor-transparency="reduce"] .n-lumen-shell {
+  background-color: var(--n-material-fallback);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :is(.n-material, .n-material-strong),
+  [data-noor-appearance="lumen"] :is(.n-surface-auto, .n-lumen-shell) {
+    background-color: var(--n-material-fallback);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media (forced-colors: active) {
+  :is(.n-material, .n-material-strong, .n-surface-auto, .n-lumen-shell, .n-surface-elevated) {
+    background: Canvas;
+    border-color: CanvasText;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .n-atmosphere::before {
+    display: none;
+  }
+
+  [data-noor-appearance="lumen"] .n-focus-glow:focus-within {
+    box-shadow: none;
+  }
+}

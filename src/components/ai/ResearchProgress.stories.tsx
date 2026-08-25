@@ -5,6 +5,7 @@ const meta: Meta<typeof ResearchProgress> = {
   title: "AI/ResearchProgress",
   component: ResearchProgress,
   tags: ["autodocs"],
+  parameters: { a11y: { test: "error" } },
 };
 export default meta;
 type Story = StoryObj<typeof ResearchProgress>;

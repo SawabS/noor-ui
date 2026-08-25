@@ -4,7 +4,7 @@ import { WelcomeScreenExample } from "./WelcomeScreenExample";
 const meta: Meta<typeof WelcomeScreenExample> = {
   title: "Examples/1. Welcome Screen",
   component: WelcomeScreenExample,
-  parameters: { layout: "fullscreen" },
+  parameters: { layout: "fullscreen", a11y: { test: "error" } },
 };
 export default meta;
 type Story = StoryObj<typeof WelcomeScreenExample>;

@@ -12,6 +12,7 @@ const meta: Meta<typeof DropdownMenu> = {
   title: "Overlays/DropdownMenu",
   component: DropdownMenu,
   tags: ["autodocs"],
+  parameters: { a11y: { test: "error" } },
 };
 export default meta;
 type Story = StoryObj<typeof DropdownMenu>;

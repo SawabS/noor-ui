@@ -66,7 +66,7 @@ export function SegmentedControl({
     <div
       role="radiogroup"
       {...ariaProps}
-      className={cn("inline-flex gap-0.5 rounded-md bg-surface-raised p-1", className)}
+      className={cn("n-segmented inline-flex gap-0.5 rounded-md bg-surface-raised p-1", className)}
     >
       {options.map((option, index) => {
         const isActive = option.value === current;

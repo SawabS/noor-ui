@@ -31,9 +31,9 @@ export function ChatLayout({
   className,
 }: ChatLayoutProps) {
   return (
-    <div className={cn("flex h-dvh w-full overflow-hidden bg-canvas", className)}>
+    <div className={cn("n-atmosphere flex h-dvh w-full overflow-hidden bg-canvas", className)}>
       {sidebar}
-      <div className="flex min-w-0 flex-1 flex-col">
+      <div className="relative flex min-w-0 flex-1 flex-col">
         {topNavigation}
         <div className="flex min-h-0 flex-1">{children}</div>
         {composer && (

@@ -4,7 +4,7 @@ import { ActiveChatExample } from "./ActiveChatExample";
 const meta: Meta<typeof ActiveChatExample> = {
   title: "Examples/2. Active Chat",
   component: ActiveChatExample,
-  parameters: { layout: "fullscreen" },
+  parameters: { layout: "fullscreen", a11y: { test: "error" } },
 };
 export default meta;
 type Story = StoryObj<typeof ActiveChatExample>;

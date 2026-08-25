@@ -2,6 +2,9 @@ import * as React from "react";
 import * as RadixDropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Check, Circle } from "lucide-react";
 import { cn } from "../../utilities/cn";
+import type { OverlaySurfaceVariant } from "../../foundations/types";
+import { getOverlaySurfaceClassName } from "../../utilities/surface";
+import { useAppearancePortalContainer } from "../../providers/appearance-provider";
 
 export const DropdownMenuPrimitive = RadixDropdownMenu;
 
@@ -13,6 +16,7 @@ export interface DropdownMenuProps {
   open?: boolean;
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
+  surface?: OverlaySurfaceVariant;
 }
 
 export function DropdownMenu({
@@ -23,16 +27,21 @@ export function DropdownMenu({
   open,
   defaultOpen,
   onOpenChange,
+  surface = "auto",
 }: DropdownMenuProps) {
+  const portalContainer = useAppearancePortalContainer();
   return (
     <RadixDropdownMenu.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
       <RadixDropdownMenu.Trigger asChild>{trigger}</RadixDropdownMenu.Trigger>
-      <RadixDropdownMenu.Portal>
+      <RadixDropdownMenu.Portal container={portalContainer}>
         <RadixDropdownMenu.Content
           align={align}
           side={side}
           sideOffset={6}
-          className="z-dropdown min-w-40 rounded-md border border-border bg-surface py-1 shadow-md animate-fade-in motion-reduce:animate-none"
+          className={cn(
+            "z-dropdown min-w-40 rounded-md border border-border py-1 shadow-md animate-fade-in motion-reduce:animate-none",
+            getOverlaySurfaceClassName(surface),
+          )}
         >
           {children}
         </RadixDropdownMenu.Content>

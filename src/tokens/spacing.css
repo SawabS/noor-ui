@@ -69,6 +69,11 @@
   --n-content-lg: 56rem; /* 896px */
   --n-content-xl: 72rem; /* 1152px */
 
+  /* Component and shell geometry */
+  --n-composer-max-height: 15rem; /* 240px */
+  --n-artifact-panel-width: 32rem;
+  --n-atmosphere-grid-size: 2rem;
+
   /* Breakpoints (reference only — Tailwind screens are the source of truth
      for media queries; these exist for JS consumers like useMediaQuery) */
   --n-breakpoint-xs: 480px;

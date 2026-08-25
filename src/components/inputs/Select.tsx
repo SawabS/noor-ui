@@ -2,10 +2,11 @@ import * as RadixSelect from "@radix-ui/react-select";
 import { Check, ChevronDown } from "lucide-react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utilities/cn";
+import { useAppearancePortalContainer } from "../../providers/appearance-provider";
 
 const triggerVariants = cva(
   [
-    "inline-flex w-full items-center justify-between gap-2 rounded-md border border-border bg-surface",
+    "n-control inline-flex w-full items-center justify-between gap-2 rounded-md border border-border bg-surface",
     "text-body-sm text-text-primary transition-colors duration-fast ease-standard",
     "hover:border-border-strong data-[placeholder]:text-text-muted",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2 focus-visible:ring-offset-canvas",
@@ -54,6 +55,7 @@ export function Select({
   className,
   ...ariaProps
 }: SelectProps) {
+  const portalContainer = useAppearancePortalContainer();
   return (
     <RadixSelect.Root
       value={value}
@@ -68,12 +70,12 @@ export function Select({
           <ChevronDown className="size-4 text-text-muted" aria-hidden="true" />
         </RadixSelect.Icon>
       </RadixSelect.Trigger>
-      <RadixSelect.Portal>
+      <RadixSelect.Portal container={portalContainer}>
         <RadixSelect.Content
           position="popper"
           sideOffset={6}
           className={cn(
-            "z-dropdown overflow-hidden rounded-md border border-border bg-surface shadow-md",
+            "n-surface-auto z-dropdown overflow-hidden rounded-md border border-border bg-surface shadow-md",
             "data-[state=open]:animate-fade-in",
           )}
         >

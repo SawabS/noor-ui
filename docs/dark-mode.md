@@ -11,6 +11,10 @@ components only ever consume the semantic names (`bg-canvas`,
 `text-text-primary`, etc.), swapping the attribute is the entire theme
 switch - no re-render logic, no prop drilling.
 
+Theme is independent from the appearance axis. `ThemeProvider` chooses a
+palette and color scheme; `AppearanceProvider` chooses `default` or `lumen`
+and controls transparency. Do not encode appearance state into a theme name.
+
 ```tsx
 import { ThemeProvider } from "noor-ui/providers";
 

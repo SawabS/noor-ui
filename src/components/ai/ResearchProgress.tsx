@@ -35,12 +35,19 @@ export function ResearchProgress({ steps, className }: ResearchProgressProps) {
   return (
     <div
       className={cn(
-        "flex flex-col gap-3 rounded-lg border border-border bg-surface p-4",
+        "n-agent-surface flex flex-col gap-3 rounded-lg border border-border bg-surface p-4",
         className,
       )}
       role="group"
       aria-label="Research progress"
     >
+      <span className="sr-only" aria-live="polite" aria-atomic="true">
+        {activeStep
+          ? `${activeStep.label}. ${doneCount} of ${steps.length} steps complete.`
+          : doneCount === steps.length
+            ? `Research complete. ${doneCount} of ${steps.length} steps complete.`
+            : `${doneCount} of ${steps.length} steps complete.`}
+      </span>
       <div className="flex items-center justify-between gap-3">
         <Typography variant="body-sm" weight="medium">
           {activeStep

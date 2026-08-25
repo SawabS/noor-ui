@@ -1,9 +1,17 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utilities/cn";
+import { getSurfaceClassName } from "../../utilities/surface";
+import type { SurfaceVariant } from "../../foundations/types";
 
-const cardVariants = cva("bg-surface border border-border rounded-lg", {
+const cardVariants = cva("border border-border rounded-lg", {
   variants: {
+    surface: {
+      solid: getSurfaceClassName("solid"),
+      tonal: getSurfaceClassName("tonal"),
+      material: getSurfaceClassName("material"),
+      elevated: getSurfaceClassName("elevated"),
+    } satisfies Record<SurfaceVariant, string>,
     padding: {
       none: "",
       sm: "p-3",
@@ -14,15 +22,19 @@ const cardVariants = cva("bg-surface border border-border rounded-lg", {
       true: "cursor-pointer transition-colors duration-fast ease-standard hover:border-border-strong hover:shadow-sm",
     },
   },
-  defaultVariants: { padding: "md" },
+  defaultVariants: { padding: "md", surface: "solid" },
 });
 
 export interface CardProps
   extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {}
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, padding, interactive, ...props }, ref) => (
-    <div ref={ref} className={cn(cardVariants({ padding, interactive }), className)} {...props} />
+  ({ className, padding, interactive, surface, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn(cardVariants({ padding, interactive, surface }), className)}
+      {...props}
+    />
   ),
 );
 Card.displayName = "Card";

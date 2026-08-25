@@ -60,10 +60,11 @@ export function PromptComposer({
 }: PromptComposerProps) {
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
   const isComposing = React.useRef(false);
-  useAutosizeTextarea(textareaRef, value, 240);
+  useAutosizeTextarea(textareaRef, value);
 
   const canSubmit = value.trim().length > 0 && !disabled && !loading && !streaming;
   const isBusy = loading || streaming;
+  const state = streaming ? "streaming" : loading ? "loading" : "idle";
 
   const handleSubmit = () => {
     if (!canSubmit) return;
@@ -79,8 +80,10 @@ export function PromptComposer({
 
   return (
     <div
+      data-state={state}
+      aria-busy={isBusy || undefined}
       className={cn(
-        "flex flex-col gap-2 rounded-xl border border-border bg-surface p-3 shadow-xs",
+        "n-surface-auto n-focus-glow flex flex-col gap-2 rounded-xl border border-border bg-surface p-3 shadow-xs",
         "focus-within:border-border-strong focus-within:shadow-sm",
         "transition-[box-shadow,border-color] duration-fast ease-standard",
         disabled && "opacity-disabled",
@@ -103,7 +106,7 @@ export function PromptComposer({
         rows={1}
         aria-label={ariaLabel}
         className={cn(
-          "max-h-60 w-full resize-none bg-transparent text-body text-text-primary placeholder:text-text-muted",
+          "max-h-composer w-full resize-none bg-transparent text-body text-text-primary placeholder:text-text-muted",
           "focus:outline-none disabled:cursor-not-allowed",
         )}
       />

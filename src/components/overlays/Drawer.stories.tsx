@@ -7,6 +7,7 @@ const meta: Meta<typeof Drawer> = {
   title: "Overlays/Drawer",
   component: Drawer,
   tags: ["autodocs"],
+  parameters: { a11y: { test: "error" } },
   argTypes: { side: { control: "select", options: ["start", "end", "top", "bottom"] } },
 };
 export default meta;

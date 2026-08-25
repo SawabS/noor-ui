@@ -10,7 +10,7 @@ export const TabsList = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <RadixTabs.List
     ref={ref}
-    className={cn("flex items-center gap-4 border-b border-border", className)}
+    className={cn("n-tabs flex items-center gap-4 border-b border-border", className)}
     {...props}
   />
 ));

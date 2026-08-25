@@ -34,7 +34,29 @@
   --n-success: var(--n-prim-green-500);
   --n-warning: var(--n-prim-amber-500);
   --n-danger: var(--n-prim-red-500);
+  --n-danger-contrast: var(--n-prim-black-soft);
   --n-info: var(--n-prim-blue-500);
+
+  /* Appearance-axis defaults. These deliberately collapse to the classic
+     Noor recipes until an appearance profile overrides them. */
+  --n-atmosphere-canvas: var(--n-canvas);
+  --n-atmosphere-glow: transparent;
+  --n-atmosphere-grid: transparent;
+  --n-accent-focal: var(--n-primary-action);
+  --n-accent-focal-text: var(--n-primary-action-text);
+  --n-accent-glow: transparent;
+  --n-surface-tonal: var(--n-surface-raised);
+  --n-surface-elevated: var(--n-surface);
+  --n-material-fallback: var(--n-surface);
+  --n-material-fill: var(--n-surface);
+  --n-material-fill-strong: var(--n-surface);
+  --n-material-border: var(--n-border);
+  --n-material-highlight: transparent;
+  --n-material-blur: 0px;
+  --n-material-blur-strong: 0px;
+  --n-material-saturation: 100%;
+  --n-selection-background: var(--n-text-primary);
+  --n-selection-text: var(--n-canvas);
 
   /* Soft tonal backgrounds for status surfaces (alerts, badges) */
   --n-success-bg: #e7f5ee;

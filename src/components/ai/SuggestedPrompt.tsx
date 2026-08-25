@@ -17,7 +17,7 @@ export const SuggestedPrompt = React.forwardRef<HTMLButtonElement, SuggestedProm
       ref={ref}
       type="button"
       className={cn(
-        "flex w-full items-start gap-3 rounded-lg border border-border bg-surface p-4 text-start",
+        "n-suggestion-surface flex w-full items-start gap-3 rounded-lg border border-border bg-surface p-4 text-start",
         "transition-colors duration-fast ease-standard hover:bg-surface-hover hover:border-border-strong",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-2 focus-visible:ring-offset-canvas",
         className,

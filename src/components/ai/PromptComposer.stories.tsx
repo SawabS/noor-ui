@@ -8,7 +8,7 @@ const meta: Meta<typeof PromptComposer> = {
   title: "AI/PromptComposer",
   component: PromptComposer,
   tags: ["autodocs"],
-  parameters: { layout: "padded" },
+  parameters: { layout: "padded", a11y: { test: "error" } },
 };
 export default meta;
 type Story = StoryObj<typeof PromptComposer>;
@@ -99,4 +99,50 @@ export const RTL: Story = {
       />
     </div>
   ),
+};
+
+export const LumenDark: Story = {
+  render: () => <Controlled value="Design a multilingual research workspace" />,
+  globals: { appearance: "lumen", theme: "dark" },
+};
+
+export const LumenReducedTransparency: Story = {
+  render: () => <Controlled value="Summarize this document" />,
+  globals: { appearance: "lumen", theme: "dark", transparency: "reduce" },
+};
+
+export const LumenArabicRTL: Story = {
+  render: () => (
+    <Controlled
+      value="لخّص أحدث الأبحاث في هذا الموضوع"
+      placeholder="اكتب رسالة..."
+      researchMode
+      modelSelector={
+        <ModelSelector
+          models={[{ value: "reasoning", label: "استدلال" }]}
+          value="reasoning"
+          onValueChange={() => {}}
+        />
+      }
+    />
+  ),
+  globals: { appearance: "lumen", theme: "dark", direction: "rtl" },
+};
+
+export const LumenSoraniRTL: Story = {
+  render: () => (
+    <Controlled
+      value="پوختەی ئەم توێژینەوەیە بنووسەوە"
+      placeholder="نامەیەک بنووسە..."
+      researchMode
+      modelSelector={
+        <ModelSelector
+          models={[{ value: "reasoning", label: "بیرکردنەوە" }]}
+          value="reasoning"
+          onValueChange={() => {}}
+        />
+      }
+    />
+  ),
+  globals: { appearance: "lumen", theme: "light", direction: "rtl" },
 };

@@ -6,6 +6,7 @@ const meta: Meta<typeof Dialog> = {
   title: "Overlays/Dialog",
   component: Dialog,
   tags: ["autodocs"],
+  parameters: { a11y: { test: "error" } },
 };
 export default meta;
 type Story = StoryObj<typeof Dialog>;

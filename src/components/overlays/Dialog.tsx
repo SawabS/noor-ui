@@ -3,6 +3,9 @@ import * as RadixDialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import { cn } from "../../utilities/cn";
 import { IconButton } from "../inputs/IconButton";
+import type { OverlaySurfaceVariant } from "../../foundations/types";
+import { getOverlaySurfaceClassName } from "../../utilities/surface";
+import { useAppearancePortalContainer } from "../../providers/appearance-provider";
 
 export const DialogPrimitive = RadixDialog;
 
@@ -21,6 +24,7 @@ export interface DialogProps {
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
   className?: string;
+  surface?: OverlaySurfaceVariant;
 }
 
 /** A composed Dialog for the common case. For advanced composition, use the
@@ -33,12 +37,14 @@ export function Dialog({
   open,
   defaultOpen,
   onOpenChange,
+  surface = "auto",
   className,
 }: DialogProps) {
+  const portalContainer = useAppearancePortalContainer();
   return (
     <RadixDialog.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
       {trigger && <RadixDialog.Trigger asChild>{trigger}</RadixDialog.Trigger>}
-      <RadixDialog.Portal>
+      <RadixDialog.Portal container={portalContainer}>
         <RadixDialog.Overlay
           className={cn(
             "fixed inset-0 z-overlay bg-[rgb(var(--n-shadow-color)/0.4)]",
@@ -49,7 +55,8 @@ export function Dialog({
           <RadixDialog.Content
             className={cn(
               "relative w-full max-w-content-sm pointer-events-auto",
-              "rounded-lg border border-border bg-surface p-6 shadow-lg",
+              "rounded-lg border border-border p-6 shadow-lg",
+              getOverlaySurfaceClassName(surface),
               "animate-slide-in-from-bottom motion-reduce:animate-none",
               "focus-visible:outline-none",
               className,

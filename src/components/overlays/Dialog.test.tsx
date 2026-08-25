@@ -3,6 +3,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Dialog } from "./Dialog";
 import { Button } from "../inputs/Button";
+import { AppearanceProvider } from "../../providers/appearance-provider";
 
 describe("Dialog", () => {
   it("opens on trigger click, exposes an accessible dialog with its title, and closes on Escape returning focus to the trigger", async () => {
@@ -70,5 +71,26 @@ describe("Dialog", () => {
       </Dialog>,
     );
     expect(await screen.findByRole("dialog")).toBeInTheDocument();
+  });
+
+  it("applies an explicit semantic surface without changing dialog behavior", async () => {
+    render(
+      <Dialog title="Material dialog" defaultOpen surface="material">
+        Content
+      </Dialog>,
+    );
+    expect(await screen.findByRole("dialog")).toHaveClass("n-material");
+  });
+
+  it("keeps portalled content inside a scoped appearance boundary", async () => {
+    render(
+      <AppearanceProvider appearance="lumen" scope="scoped">
+        <Dialog title="Scoped dialog" defaultOpen>
+          Content
+        </Dialog>
+      </AppearanceProvider>,
+    );
+    const dialog = await screen.findByRole("dialog");
+    expect(dialog.closest('[data-noor-appearance="lumen"]')).not.toBeNull();
   });
 });

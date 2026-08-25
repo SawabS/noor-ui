@@ -6,6 +6,7 @@ const meta: Meta<typeof Tooltip> = {
   title: "Feedback/Tooltip",
   component: Tooltip,
   tags: ["autodocs"],
+  parameters: { a11y: { test: "error" } },
   decorators: [
     (Story) => (
       <TooltipProvider>

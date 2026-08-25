@@ -10,6 +10,7 @@ const meta: Meta<typeof TopNavigation> = {
   title: "Navigation/TopNavigation",
   component: TopNavigation,
   tags: ["autodocs"],
+  parameters: { a11y: { test: "error" } },
 };
 export default meta;
 type Story = StoryObj<typeof TopNavigation>;

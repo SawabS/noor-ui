@@ -4,6 +4,9 @@ import { Command } from "cmdk";
 import { Search } from "lucide-react";
 import { cn } from "../../utilities/cn";
 import { VisuallyHidden } from "../primitives/VisuallyHidden";
+import type { OverlaySurfaceVariant } from "../../foundations/types";
+import { getOverlaySurfaceClassName } from "../../utilities/surface";
+import { useAppearancePortalContainer } from "../../providers/appearance-provider";
 
 export interface CommandPaletteItem {
   id: string;
@@ -25,6 +28,7 @@ export interface CommandPaletteProps {
   placeholder?: string;
   /** Registers a Cmd/Ctrl+K listener that opens the palette. */
   enableShortcut?: boolean;
+  surface?: OverlaySurfaceVariant;
 }
 
 export function CommandPalette({
@@ -33,7 +37,9 @@ export function CommandPalette({
   onOpenChange,
   placeholder = "Type a command or search...",
   enableShortcut = false,
+  surface = "auto",
 }: CommandPaletteProps) {
+  const portalContainer = useAppearancePortalContainer();
   React.useEffect(() => {
     if (!enableShortcut) return;
     const handler = (e: KeyboardEvent) => {
@@ -48,12 +54,13 @@ export function CommandPalette({
 
   return (
     <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
-      <RadixDialog.Portal>
+      <RadixDialog.Portal container={portalContainer}>
         <RadixDialog.Overlay className="fixed inset-0 z-overlay bg-[rgb(var(--n-shadow-color)/0.4)] animate-fade-in motion-reduce:animate-none" />
         <div className="fixed inset-0 z-modal flex items-start justify-center p-4 pt-[15vh] pointer-events-none">
           <RadixDialog.Content
             className={cn(
-              "pointer-events-auto w-full max-w-content-sm overflow-hidden rounded-lg border border-border bg-surface shadow-lg",
+              "pointer-events-auto w-full max-w-content-sm overflow-hidden rounded-lg border border-border shadow-lg",
+              getOverlaySurfaceClassName(surface),
               "animate-slide-in-from-bottom motion-reduce:animate-none focus-visible:outline-none",
             )}
           >
