@@ -7,17 +7,18 @@ and the most important props, not the complete type signature.
 
 ## Foundations
 
-| Component | Purpose | Key props |
-|---|---|---|
-| `ThemeProvider` | Light/dark/system theming via `data-theme` | `theme`, `defaultTheme`, `scope`, `storageKey` |
-| `DirectionProvider` | LTR/RTL context, wraps Radix's own | `direction`, `defaultDirection`, `applyToDocument` |
-| `ThemeToggle` | Cycles light → dark → system | - |
-| `Typography` | Renders the type scale | `variant`, `color`, `weight`, `as`, `truncate` |
-| `Icon` | Sized lucide-react wrapper | `icon`, `size`, `label` |
-| `VisuallyHidden` | Screen-reader-only content | - |
-| `Separator` | Radix-based divider | `orientation`, `decorative` |
-| `Skeleton` | Loading placeholder block | - |
-| `Spinner` | Loading indicator (keeps spinning under reduced motion) | `size`, `label` |
+| Component           | Purpose                                                 | Key props                                          |
+| ------------------- | ------------------------------------------------------- | -------------------------------------------------- |
+| `ThemeProvider`     | System-aware, multi-palette theming via `data-theme`    | `theme`, `defaultTheme`, `scope`, `storageKey`     |
+| `DirectionProvider` | LTR/RTL context, wraps Radix's own                      | `direction`, `defaultDirection`, `applyToDocument` |
+| `ThemeToggle`       | Cycles light → dark → system                            | -                                                  |
+| `ThemePicker`       | Selects any built-in color palette                      | `size`, `className`, `aria-label`                  |
+| `Typography`        | Renders the type scale                                  | `variant`, `color`, `weight`, `as`, `truncate`     |
+| `Icon`              | Sized lucide-react wrapper                              | `icon`, `size`, `label`                            |
+| `VisuallyHidden`    | Screen-reader-only content                              | -                                                  |
+| `Separator`         | Radix-based divider                                     | `orientation`, `decorative`                        |
+| `Skeleton`          | Loading placeholder block                               | -                                                  |
+| `Spinner`           | Loading indicator (keeps spinning under reduced motion) | `size`, `label`                                    |
 
 ## Inputs
 

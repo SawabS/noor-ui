@@ -1,25 +1,7 @@
 import { Sun, Moon, MonitorCog } from "lucide-react";
-import { useTheme, type ThemeName } from "../../providers/theme-provider";
+import { themeOptions, useTheme } from "../../providers/theme-provider";
 import { IconButton } from "../inputs/IconButton";
 import { Icon } from "./Icon";
-
-const cycle: Record<ThemeName, ThemeName> = {
-  light: "dark",
-  dark: "system",
-  system: "light",
-};
-
-const iconFor: Record<ThemeName, typeof Sun> = {
-  light: Sun,
-  dark: Moon,
-  system: MonitorCog,
-};
-
-const labelFor: Record<ThemeName, string> = {
-  light: "Light theme active. Switch to dark theme.",
-  dark: "Dark theme active. Switch to system theme.",
-  system: "System theme active. Switch to light theme.",
-};
 
 export interface ThemeToggleProps {
   className?: string;
@@ -27,15 +9,20 @@ export interface ThemeToggleProps {
 
 /** Cycles light → dark → system. A single control keeps the header compact. */
 export function ThemeToggle({ className }: ThemeToggleProps) {
-  const { theme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
+  const nextTheme = theme === "light" ? "dark" : theme === "dark" ? "system" : "light";
+  const icon = theme === "system" ? MonitorCog : resolvedTheme === "dark" ? Moon : Sun;
+  const currentLabel = themeOptions.find((option) => option.value === theme)?.label ?? theme;
+  const nextLabel = themeOptions.find((option) => option.value === nextTheme)?.label ?? nextTheme;
+  const label = `${currentLabel} theme active. Switch to ${nextLabel} theme.`;
   return (
     <IconButton
       className={className}
       variant="ghost"
-      aria-label={labelFor[theme]}
-      onClick={() => setTheme(cycle[theme])}
+      aria-label={label}
+      onClick={() => setTheme(nextTheme)}
     >
-      <Icon icon={iconFor[theme]} size="sm" />
+      <Icon icon={icon} size="sm" />
     </IconButton>
   );
 }

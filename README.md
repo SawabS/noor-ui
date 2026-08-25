@@ -44,19 +44,23 @@ function App() {
 }
 ```
 
+Noor UI includes Noor Light/Dark, GitHub Light/Dark, Dracula, One Dark Pro,
+Nord, and Catppuccin Mocha palettes. Use `ThemePicker` for the complete list or
+`ThemeToggle` for the compact light/dark/system cycle.
+
 Import the stylesheet once, at your app's entry point. It contains the token
-CSS custom properties (light + dark) and the compiled Tailwind utility
+CSS custom properties for every palette and the compiled Tailwind utility
 classes every component depends on; component files never inline raw color
 or spacing values, so nothing renders correctly without it.
 
 ## Package structure
 
-| Import                  | Contents                                             |
-| ------------------------ | ----------------------------------------------------- |
-| `noor-ui`                | All components, foundations, hooks, utilities         |
-| `noor-ui/providers`      | `ThemeProvider`, `DirectionProvider` and their hooks   |
-| `noor-ui/tokens`         | Programmatic token manifest (colors, scale, metadata)  |
-| `noor-ui/styles.css`     | Compiled CSS: tokens + Tailwind utilities              |
+| Import               | Contents                                              |
+| -------------------- | ----------------------------------------------------- |
+| `noor-ui`            | All components, foundations, hooks, utilities         |
+| `noor-ui/providers`  | `ThemeProvider`, `DirectionProvider` and their hooks  |
+| `noor-ui/tokens`     | Programmatic token manifest (colors, scale, metadata) |
+| `noor-ui/styles.css` | Compiled CSS: tokens + Tailwind utilities             |
 
 ## Documentation
 

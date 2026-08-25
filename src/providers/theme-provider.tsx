@@ -1,13 +1,28 @@
 import * as React from "react";
 
-export type ThemeName = "light" | "dark" | "system";
+export const themeOptions = [
+  { value: "system", label: "System", colorScheme: "system" },
+  { value: "light", label: "Noor Light", colorScheme: "light" },
+  { value: "dark", label: "Noor Dark", colorScheme: "dark" },
+  { value: "github-light", label: "GitHub Light", colorScheme: "light" },
+  { value: "github-dark", label: "GitHub Dark", colorScheme: "dark" },
+  { value: "dracula", label: "Dracula", colorScheme: "dark" },
+  { value: "one-dark-pro", label: "One Dark Pro", colorScheme: "dark" },
+  { value: "nord", label: "Nord", colorScheme: "dark" },
+  { value: "catppuccin-mocha", label: "Catppuccin Mocha", colorScheme: "dark" },
+] as const;
+
+export type ThemeName = (typeof themeOptions)[number]["value"];
 export type ResolvedTheme = "light" | "dark";
+export type ActiveTheme = Exclude<ThemeName, "system">;
 
 interface ThemeContextValue {
   /** The theme setting as chosen by the user, including "system". */
   theme: ThemeName;
   /** "system" resolved to an actual light/dark value. */
   resolvedTheme: ResolvedTheme;
+  /** The concrete palette applied to the DOM. */
+  activeTheme: ActiveTheme;
   setTheme: (theme: ThemeName) => void;
 }
 
@@ -24,7 +39,7 @@ export interface ThemeProviderProps {
   /**
    * "root" (default) writes data-theme onto <html> so the whole document
    * themes consistently. "scoped" instead wraps children in a themed div —
-   * use this to render light/dark side-by-side (e.g. the token showcase).
+   * use this to render palettes side-by-side (e.g. the token showcase).
    */
   scope?: "root" | "scoped";
   className?: string;
@@ -33,6 +48,16 @@ export interface ThemeProviderProps {
 function getSystemTheme(): ResolvedTheme {
   if (typeof window === "undefined" || !window.matchMedia) return "light";
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+export function isThemeName(value: string | null): value is ThemeName {
+  return themeOptions.some((option) => option.value === value);
+}
+
+function getThemeColorScheme(theme: ActiveTheme): ResolvedTheme {
+  return themeOptions.find((option) => option.value === theme)?.colorScheme === "light"
+    ? "light"
+    : "dark";
 }
 
 export function ThemeProvider({
@@ -47,7 +72,7 @@ export function ThemeProvider({
   const [uncontrolledTheme, setUncontrolledTheme] = React.useState<ThemeName>(() => {
     if (typeof window === "undefined" || !storageKey) return defaultTheme;
     const stored = window.localStorage.getItem(storageKey);
-    return (stored as ThemeName) || defaultTheme;
+    return isThemeName(stored) ? stored : defaultTheme;
   });
 
   const theme = controlledTheme ?? uncontrolledTheme;
@@ -61,7 +86,8 @@ export function ThemeProvider({
     return () => mql.removeEventListener("change", listener);
   }, []);
 
-  const resolvedTheme: ResolvedTheme = theme === "system" ? systemTheme : theme;
+  const activeTheme: ActiveTheme = theme === "system" ? systemTheme : theme;
+  const resolvedTheme = getThemeColorScheme(activeTheme);
 
   const setTheme = React.useCallback(
     (next: ThemeName) => {
@@ -76,23 +102,19 @@ export function ThemeProvider({
 
   React.useEffect(() => {
     if (scope !== "root" || typeof document === "undefined") return;
-    document.documentElement.setAttribute("data-theme", resolvedTheme);
+    document.documentElement.setAttribute("data-theme", activeTheme);
     document.documentElement.style.colorScheme = resolvedTheme;
-  }, [scope, resolvedTheme]);
+  }, [scope, activeTheme, resolvedTheme]);
 
   const value = React.useMemo(
-    () => ({ theme, resolvedTheme, setTheme }),
-    [theme, resolvedTheme, setTheme],
+    () => ({ theme, resolvedTheme, activeTheme, setTheme }),
+    [theme, resolvedTheme, activeTheme, setTheme],
   );
 
   if (scope === "scoped") {
     return (
       <ThemeContext.Provider value={value}>
-        <div
-          data-theme={resolvedTheme}
-          className={className}
-          style={{ colorScheme: resolvedTheme }}
-        >
+        <div data-theme={activeTheme} className={className} style={{ colorScheme: resolvedTheme }}>
           {children}
         </div>
       </ThemeContext.Provider>
