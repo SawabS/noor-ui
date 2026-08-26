@@ -50,6 +50,64 @@ Noor targets **WCAG 2.2 AA** as a baseline across every component.
   breaking the page layout on mobile (also required by the responsive
   guidance below).
 
+## Direction: logical properties, always
+
+Physical inset and spacing utilities do not mirror. A toast pinned with
+`right: 20px` stayed bottom-right in Arabic and Sorani; the logical
+`inset-inline-end` follows the writing direction for free.
+
+Use `start`/`end`, `ps`/`pe`, `ms`/`me`, `border-s`/`border-e`,
+`text-start`/`text-end`, and `inset-inline-*` rather than their `left`/`right`
+counterparts. An ESLint `no-restricted-syntax` rule enforces this over class
+strings; nothing in `src/` trips it today, and the rule is what keeps it that
+way. Stories and tests are exempt, because they sometimes name a physical
+direction deliberately in order to assert that a layout mirrored.
+
+Two places where physical really is correct, and are commented as such:
+
+- Radix `side="left" | "right"` props. Those are physical placements and Radix
+  mirrors them itself.
+- `.n-marker`'s `top: 0; left: 0`. The travelling marker is positioned by
+  `transform: translate()` from `offsetLeft`/`offsetTop`, which are physical.
+  Anchoring at the physical origin is exactly what lets one code path serve
+  both directions with no `dir` branch — switching it to `inset-inline-start`
+  would break RTL, not fix it.
+
+Arrow-key navigation mirrors on the **horizontal axis only**. `ArrowLeft`
+advances in an RTL `SegmentedControl`, but `ArrowDown` still means "down" in
+every writing direction; mirroring the vertical axis reverses vertical groups
+for Arabic and Sorani readers for no reason.
+
+## Motion
+
+Every animated primitive keeps its affordance and drops the travel under
+`prefers-reduced-motion: reduce`. The travelling selection marker still lands
+on the selected item, it just arrives instantly.
+
+**Two independent animations must sit on separate elements.** Adding to an
+element's `animation` list on hover restarts the animations already in it and
+snaps them back to their start — so a continuous spin plus a hover swell on
+one element produces a visible glitch every time the pointer enters. Put the
+spin on the child and the swell on the parent. This is not obvious from the
+spec and it has bitten a consuming app.
+
+## Forced colours
+
+`@media (forced-colors: active)` removes blur, shadows, glow and the
+decorative atmosphere, and restores system colours. Two newer primitives need
+their own fallback, because what they use to convey meaning stops existing:
+
+- **The selection marker** swaps its tinted fill for a `CanvasText` ring. A
+  colour wash conveys nothing when the system is picking the colours.
+- **The bloom toast** (`ToastProvider surface="bloom"`) is defined entirely
+  inside `@media not all and (forced-colors: active)`. The component still
+  emits the normal box classes underneath, so under forced colours the strip
+  simply does not apply and the solid box comes back — one code path, no
+  branch.
+
+The default scrollbar hands `scrollbar-color` back to `auto` under forced
+colours, so the system's own bar is used rather than a `currentColor` mix.
+
 ## Testing checklist (see `docs/../src/**/*.test.tsx` for automated coverage)
 
 - [ ] Tab through the component with no mouse - can you reach and operate
@@ -63,3 +121,7 @@ Noor targets **WCAG 2.2 AA** as a baseline across every component.
       enabled?
 - [ ] Does the component read correctly in a screen reader with `dir="rtl"`
       and `lang="ar"`/`lang="ckb"` set?
+- [ ] Does it still convey its state under `forced-colors: active`, without
+      relying on a fill, glow or shadow?
+- [ ] If it renders a caller-supplied array, does it bound what it paints —
+      and does it still report the *full* count?

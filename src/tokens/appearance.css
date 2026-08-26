@@ -32,6 +32,12 @@
   --n-focus-ring: #1468d8;
   --n-selection-background: rgb(20 104 216 / 0.2);
   --n-selection-text: var(--n-text-primary);
+  /* Under Lumen the interactive accent and the focal accent are the same
+     blue on purpose: hover tints, selection markers, focus and "loaded"
+     confirmation should all speak with one voice. */
+  --n-accent-interactive: var(--n-accent-focal);
+  --n-accent-interactive-contrast: var(--n-accent-focal-text);
+  --n-loaded: var(--n-accent-interactive);
 }
 
 :is(
@@ -63,7 +69,6 @@
   --n-canvas: #080b12;
   --n-sidebar: #0d131d;
   --n-surface: #121a25;
-  --n-surface-raised: #101722;
   --n-surface-hover: #172231;
   --n-surface-active: #1d2a3c;
   --n-atmosphere-canvas: #080b12;
@@ -72,19 +77,43 @@
   --n-accent-focal: #70aeff;
   --n-accent-focal-text: #07101d;
   --n-accent-glow: rgb(47 134 255 / 0.28);
-  --n-surface-tonal: #101722;
-  --n-surface-elevated: #15202e;
-  --n-material-fallback: #121a25;
-  --n-material-fill: rgb(15 23 35 / 0.72);
-  --n-material-fill-strong: rgb(15 23 35 / 0.86);
-  --n-material-border: rgb(255 255 255 / 0.12);
-  --n-material-highlight: rgb(255 255 255 / 0.08);
+  /* Dark glass, retuned. The previous recipe was `rgb(15 23 35 / 0.72)` over
+     a `#080b12` canvas, which composites to ~#0d141e — three RGB points off
+     the canvas itself. Glass only reads as glass when it is *lighter* than
+     what sits behind it, so every card, panel and overlay in dark Lumen
+     rendered as a flat black rectangle. These fills are chosen so the
+     composite is measurably above the canvas while staying translucent
+     enough for the blur to matter; src/tokens/appearance.test.ts asserts the
+     composite and the resulting text contrast, so do not "tidy" the alpha
+     back down without re-running it. */
+  --n-surface-raised: rgb(255 255 255 / 0.1);
+  --n-surface-tonal: rgb(255 255 255 / 0.06);
+  /* Recalibrated with the fills above. Lifting the glass also lifts the floor
+     that secondary/muted text sits on: at the old near-black fill a #707070
+     muted grey cleared 4.5:1, and on the corrected fill (and again on a raised
+     tile stacked over it) it drops to ~3.25:1. These are the appearance's own
+     values rather than the theme's, because it is the appearance that changed
+     the surfaces underneath them. appearance.test.ts checks both backdrops for
+     every dark theme. */
+  --n-text-secondary: #c2cbd9;
+  --n-text-muted: #a3adbd;
+  --n-surface-elevated: #1d2839;
+  --n-material-fallback: #18212f;
+  --n-material-fill: rgb(38 51 72 / 0.55); /* over #080b12 -> ~#182130 */
+  --n-material-fill-strong: rgb(44 59 82 / 0.75); /* over #080b12 -> ~#232f42 */
+  /* Raised to match: at 0.12/0.08 the 1px inset edge disappeared entirely
+     against the lighter fill. */
+  --n-material-border: rgb(255 255 255 / 0.16);
+  --n-material-highlight: rgb(255 255 255 / 0.14);
   --n-material-blur: 20px;
   --n-material-blur-strong: 28px;
   --n-material-saturation: 125%;
   --n-focus-ring: #70aeff;
   --n-selection-background: rgb(112 174 255 / 0.24);
   --n-selection-text: var(--n-text-primary);
+  --n-accent-interactive: var(--n-accent-focal);
+  --n-accent-interactive-contrast: var(--n-accent-focal-text);
+  --n-loaded: var(--n-accent-interactive);
 }
 
 .n-surface-solid {
@@ -200,8 +229,23 @@
   background-color: var(--n-atmosphere-canvas);
 }
 
+/**
+ * Pinned to the viewport, not the document.
+ *
+ * This layer used to be `position: absolute`, so both the `100% 100%` glow
+ * and the fade mask stretched with the element. On a short page that is a
+ * tidy vignette; on a content-heavy page it becomes a wash of accent colour
+ * over the top half of the entire document, fading out far below the fold —
+ * the shell visibly changed the moment a dataset loaded. Fixing it to the
+ * viewport also stops the browser repainting a multi-screen gradient on
+ * every scroll.
+ *
+ * `z-index: -1` and the `isolation: isolate` on `.n-atmosphere` are unchanged
+ * and still work: a fixed child is still painted inside its ancestor's
+ * stacking context. Only the containing block changes.
+ */
 .n-atmosphere::before {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
@@ -231,6 +275,197 @@
   box-shadow:
     var(--n-shadow-sm),
     inset 0 1px 0 var(--n-material-highlight);
+}
+
+/* ---------------------------------------------------------------------------
+ * Surface depth cap
+ * -------------------------------------------------------------------------*/
+
+/**
+ * Escape hatch for intermediate layout wrappers.
+ *
+ * Any container that takes a surface class becomes another visible rectangle,
+ * which makes it very easy to stack card > body > panel > tile and end up
+ * four boxes deep. The house rule (docs/lumen.md) is at most two levels of
+ * visible surface: the container, and the tiles that hold content. This
+ * utility is the sanctioned way for a wrapper in between to opt out.
+ *
+ * `border-width: 0` rather than `border-color: transparent`: a transparent
+ * border still occupies a pixel per side and nudges the layout, which is how
+ * "invisible" wrappers end up shifting their contents by 2px.
+ */
+.n-surface-none,
+.n-flatten {
+  background-color: transparent;
+  background-image: none;
+  border-width: 0;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+/* ---------------------------------------------------------------------------
+ * Travelling selection marker
+ * -------------------------------------------------------------------------*/
+
+/**
+ * A one-of-N selection used to be painted by giving the active item its own
+ * background. On a translucent canvas that reads as a solid slab, and the
+ * selection *jumps*: "the old thing turned off and a new thing turned on"
+ * rather than a marker moving. `.n-marker` is the shared indicator that
+ * moves; `TravellingMarker` measures it. See src/components/primitives.
+ */
+.n-marker-track {
+  /* Both radii are declared here so the marker can be derived from them.
+     A pill marker inside a lightly rounded track leaves four visible wedges
+     of empty track at the corners — the two must stay concentric. */
+  --n-marker-inset: var(--n-space-1);
+  --n-marker-track-radius: var(--n-radius-md);
+  position: relative;
+  padding: var(--n-marker-inset);
+  border-radius: var(--n-marker-track-radius);
+}
+
+.n-marker {
+  position: absolute;
+  /* Physical `top`/`left`, deliberately, and NOT the logical equivalents:
+     the marker is positioned by `translate()` from `offsetTop`/`offsetLeft`,
+     which are physical. Anchoring at the physical origin is what lets one
+     code path serve LTR and RTL with no direction branch. Do not "fix" this
+     to inset-inline-start. */
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: calc(var(--n-marker-track-radius) - var(--n-marker-inset));
+  /* Not armed until measured. A marker painted at its initial position has
+     nothing to animate from, and a group inside a hidden container measures
+     as a zero box — arming there animates in from the wrong place when the
+     container is finally revealed. */
+  opacity: 0;
+  background-color: var(--n-surface);
+  box-shadow: var(--n-shadow-xs);
+  transition:
+    transform var(--n-duration-base) var(--n-ease-standard),
+    width var(--n-duration-base) var(--n-ease-standard),
+    height var(--n-duration-base) var(--n-ease-standard),
+    opacity var(--n-duration-fast) var(--n-ease-enter);
+}
+
+.n-marker[data-ready="true"] {
+  opacity: 1;
+}
+
+.n-marker-item {
+  position: relative;
+  z-index: 1;
+}
+
+[data-noor-appearance="lumen"] .n-marker {
+  background-color: color-mix(in srgb, var(--n-accent-interactive) 16%, transparent);
+  border: var(--n-border-width-default) solid
+    color-mix(in srgb, var(--n-accent-interactive) 38%, transparent);
+  box-shadow: inset 0 1px 0 var(--n-material-highlight);
+}
+
+/**
+ * Hover tints the label, not the background.
+ *
+ * A background fill on hover puts a second slab behind the travelling marker
+ * and the two fight. Scoped to Lumen so the classic Noor hover is unchanged
+ * for existing consumers.
+ */
+[data-noor-appearance="lumen"] .n-ghost-control:hover:not(:disabled, [aria-disabled="true"]) {
+  color: var(--n-accent-interactive);
+  background-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Keep the affordance, drop the travel: the marker still lands on the
+     selected item, it just gets there instantly. */
+  .n-marker {
+    transition: opacity var(--n-duration-fast) var(--n-ease-enter);
+  }
+}
+
+@media (forced-colors: active) {
+  /* A tinted fill conveys nothing under forced colours; a ring does. */
+  .n-marker {
+    background-color: transparent;
+    border: var(--n-border-width-thick) solid CanvasText;
+    box-shadow: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Overlays that float over their own scrim
+ * -------------------------------------------------------------------------*/
+
+/**
+ * A dimming scrim starves the panel above it: `backdrop-filter` has nothing
+ * left to pick up, so the panel reads as a flat grey slab. The lever is the
+ * scrim, not the panel — pushing the panel to `--n-material-fill-strong`
+ * only looks better by making it nearly opaque, which throws away the
+ * transparency the design depends on. So: lighten the scrim under Lumen and
+ * give the panel the same lit top edge that cards have.
+ */
+[data-noor-appearance="lumen"] .n-overlay-scrim {
+  background-color: rgb(var(--n-shadow-color) / 0.24);
+}
+
+[data-noor-appearance="lumen"] .n-overlay-panel {
+  box-shadow:
+    var(--n-shadow-lg),
+    inset 0 1px 0 var(--n-material-highlight);
+}
+
+/**
+ * The popover arrow is opaque (`fill-surface`) while the panel is
+ * translucent glass, and it sits outside the panel's backdrop-filter region
+ * so it can never match — it reads as a solid notch breaking the corner.
+ * Under Lumen there is no fill that would work, so the arrow is dropped;
+ * placement and offset are unaffected because Radix positions it absolutely.
+ */
+[data-noor-appearance="lumen"] .n-popover-arrow {
+  display: none;
+}
+
+/* ---------------------------------------------------------------------------
+ * Bloom toast
+ * -------------------------------------------------------------------------*/
+
+/**
+ * A toast that is not a box: label plus a soft radial bloom, every layer
+ * derived from `currentColor` so one rule covers all variants.
+ *
+ * The whole treatment lives inside `@media not all and (forced-colors:
+ * active)`. The component still emits the normal box classes underneath, so
+ * under forced colours — where a glow conveys nothing — none of this applies
+ * and the solid box comes back on its own.
+ */
+@media not all and (forced-colors: active) {
+  .n-toast-bloom {
+    position: relative;
+    background-color: transparent;
+    background-image: none;
+    border-width: 0;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .n-toast-bloom::before {
+    position: absolute;
+    inset: -20% -10%;
+    z-index: -1;
+    pointer-events: none;
+    content: "";
+    background-image: radial-gradient(
+      closest-side,
+      color-mix(in srgb, currentColor 20%, transparent),
+      transparent
+    );
+  }
 }
 
 [data-noor-transparency="reduce"] :is(.n-material, .n-material-strong, .n-surface-auto) {

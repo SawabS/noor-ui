@@ -1,0 +1,63 @@
+/**
+ * Default scrollbar treatment.
+ *
+ * Noor shipped no scrollbar opinion at all, so every consumer invented one —
+ * and the obvious invention is wrong. The usual recipe insets the thumb with
+ * `border: 2px solid var(--bg)`. That border is *opaque*, so it paints a
+ * strip of canvas colour down the inside edge of every translucent panel,
+ * which is very visible under Lumen.
+ *
+ * Three things make this version work:
+ *
+ * 1. `background-clip: padding-box` plus a *transparent* border gives the
+ *    same inset without painting anything behind it.
+ * 2. `currentColor` means the thumb inverts with the theme on its own; there
+ *    is no dark-mode branch to keep in sync.
+ * 3. `:where()` keeps specificity at zero, so a component that opts out (a
+ *    nav that hides its bar, a virtualised list with its own scroller) wins
+ *    without reaching for `!important`.
+ *
+ * Deliberately scoped to the document rather than an app-shell class:
+ * overlays, popovers and command palettes render into a portal outside any
+ * shell, and their lists scroll too.
+ *
+ * Deliberately NOT revealed on hover via a universal `:where(body *):hover`
+ * rule. A universal hover selector makes the browser recompute style along
+ * the whole hover chain on every pointer move; over a large table that is a
+ * measurable cost. Only the thumb's own `:hover` is styled.
+ */
+:where(html, body, body *) {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, currentColor 22%, transparent) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: color-mix(in srgb, currentColor 22%, transparent);
+  background-clip: padding-box; /* the inset the opaque border was faking */
+  border: 3px solid transparent;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: color-mix(in srgb, currentColor 42%, transparent);
+}
+
+@media (forced-colors: active) {
+  :where(html, body, body *) {
+    scrollbar-color: auto;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: CanvasText;
+  }
+}

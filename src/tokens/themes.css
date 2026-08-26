@@ -24,6 +24,12 @@
 
   --n-focus-ring: var(--n-prim-gray-dark-300);
 
+  /* Chromatic interactive accent (hover tints, selection markers, focus,
+     loaded states). Kept in-palette per theme; see semantic.css for why this
+     cannot just be --n-accent-focal. */
+  --n-accent-interactive: var(--n-prim-blue-300);
+  --n-accent-interactive-contrast: var(--n-prim-black-soft);
+
   --n-success-bg: #12301f;
   --n-warning-bg: #332409;
   --n-danger-bg: #331414;
@@ -50,6 +56,12 @@
   --n-primary-action: #1f883d;
   --n-primary-action-text: #ffffff;
   --n-focus-ring: #0969da;
+
+  /* Chromatic interactive accent (hover tints, selection markers, focus,
+     loaded states). Kept in-palette per theme; see semantic.css for why this
+     cannot just be --n-accent-focal. */
+  --n-accent-interactive: #0969da;
+  --n-accent-interactive-contrast: #ffffff;
   --n-success: #1a7f37;
   --n-warning: #9a6700;
   --n-danger: #cf222e;
@@ -79,6 +91,12 @@
   --n-primary-action: #238636;
   --n-primary-action-text: #ffffff;
   --n-focus-ring: #1f6feb;
+
+  /* Chromatic interactive accent (hover tints, selection markers, focus,
+     loaded states). Kept in-palette per theme; see semantic.css for why this
+     cannot just be --n-accent-focal. */
+  --n-accent-interactive: #58a6ff;
+  --n-accent-interactive-contrast: #0d1117;
   --n-success: #3fb950;
   --n-warning: #d29922;
   --n-danger: #f85149;
@@ -108,6 +126,12 @@
   --n-primary-action: #bd93f9;
   --n-primary-action-text: #282a36;
   --n-focus-ring: #8be9fd;
+
+  /* Chromatic interactive accent (hover tints, selection markers, focus,
+     loaded states). Kept in-palette per theme; see semantic.css for why this
+     cannot just be --n-accent-focal. */
+  --n-accent-interactive: #8be9fd;
+  --n-accent-interactive-contrast: #282a36;
   --n-success: #50fa7b;
   --n-warning: #f1fa8c;
   --n-danger: #ff5555;
@@ -137,6 +161,12 @@
   --n-primary-action: #61afef;
   --n-primary-action-text: #21252b;
   --n-focus-ring: #61afef;
+
+  /* Chromatic interactive accent (hover tints, selection markers, focus,
+     loaded states). Kept in-palette per theme; see semantic.css for why this
+     cannot just be --n-accent-focal. */
+  --n-accent-interactive: #61afef;
+  --n-accent-interactive-contrast: #21252b;
   --n-success: #98c379;
   --n-warning: #e5c07b;
   --n-danger: #e06c75;
@@ -166,6 +196,12 @@
   --n-primary-action: #88c0d0;
   --n-primary-action-text: #2e3440;
   --n-focus-ring: #88c0d0;
+
+  /* Chromatic interactive accent (hover tints, selection markers, focus,
+     loaded states). Kept in-palette per theme; see semantic.css for why this
+     cannot just be --n-accent-focal. */
+  --n-accent-interactive: #88c0d0;
+  --n-accent-interactive-contrast: #2e3440;
   --n-success: #a3be8c;
   --n-warning: #ebcb8b;
   --n-danger: #bf616a;
@@ -195,6 +231,12 @@
   --n-primary-action: #cba6f7;
   --n-primary-action-text: #1e1e2e;
   --n-focus-ring: #89b4fa;
+
+  /* Chromatic interactive accent (hover tints, selection markers, focus,
+     loaded states). Kept in-palette per theme; see semantic.css for why this
+     cannot just be --n-accent-focal. */
+  --n-accent-interactive: #89b4fa;
+  --n-accent-interactive-contrast: #1e1e2e;
   --n-success: #a6e3a1;
   --n-warning: #f9e2af;
   --n-danger: #f38ba8;

@@ -48,7 +48,11 @@ export function Popover({
           )}
         >
           {content}
-          <RadixPopover.Arrow className="fill-surface" />
+          {/* Opaque fill against a translucent panel, and positioned outside the
+              panel's backdrop-filter region so it can never match it. The
+              appearance layer drops it under Lumen rather than shipping a notch
+              that breaks the corner. */}
+          <RadixPopover.Arrow className="n-popover-arrow fill-surface" />
         </RadixPopover.Content>
       </RadixPopover.Portal>
     </RadixPopover.Root>

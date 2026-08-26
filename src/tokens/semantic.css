@@ -37,6 +37,22 @@
   --n-danger-contrast: var(--n-prim-black-soft);
   --n-info: var(--n-prim-blue-500);
 
+  /* Interactive accent. Deliberately NOT derived from --n-accent-focal:
+     outside Lumen that token falls back to --n-primary-action, which is
+     near-black in light themes and near-white in dark ones. A consumer that
+     needs one colour for hover tints, selection markers, focus and "loaded"
+     states therefore had nothing chromatic to reach for and hard-coded a hex.
+     This token is guaranteed chromatic and >= 4.5:1 on its theme's surfaces
+     in EVERY appearance — see src/tokens/appearance.test.ts. */
+  --n-accent-interactive: var(--n-prim-blue-600);
+  --n-accent-interactive-contrast: var(--n-prim-white);
+
+  /* "Loaded"/confirmed state colour. Split out from --n-success because
+     whether confirmation reads as green or as the interactive accent is a
+     design decision per product, not a constant. Defaults to success so
+     nothing changes for existing consumers. */
+  --n-loaded: var(--n-success);
+
   /* Appearance-axis defaults. These deliberately collapse to the classic
      Noor recipes until an appearance profile overrides them. */
   --n-atmosphere-canvas: var(--n-canvas);

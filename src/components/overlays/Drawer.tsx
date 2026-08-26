@@ -62,7 +62,7 @@ export function Drawer({
     <RadixDialog.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
       {trigger && <RadixDialog.Trigger asChild>{trigger}</RadixDialog.Trigger>}
       <RadixDialog.Portal container={portalContainer}>
-        <RadixDialog.Overlay className="fixed inset-0 z-overlay bg-[rgb(var(--n-shadow-color)/0.4)] animate-fade-in motion-reduce:animate-none" />
+        <RadixDialog.Overlay className="n-overlay-scrim fixed inset-0 z-overlay bg-[rgb(var(--n-shadow-color)/0.4)] animate-fade-in motion-reduce:animate-none" />
         <RadixDialog.Content
           className={cn(
             "fixed z-modal flex flex-col border border-border shadow-lg p-6",

@@ -11,6 +11,15 @@ import { getOverlaySurfaceClassName } from "../../utilities/surface";
 
 export type ToastVariant = "neutral" | "success" | "warning" | "danger";
 
+/**
+ * `"bloom"` is a box-less presentation: a label plus a soft radial bloom in
+ * `currentColor`, with no background, border or shadow. Because every layer
+ * derives from `currentColor`, one CSS rule covers all four variants. It sits
+ * on the surface axis rather than the variant axis because it is a treatment
+ * of the box, not a status.
+ */
+export type ToastSurfaceVariant = OverlaySurfaceVariant | "bloom";
+
 interface ToastItem {
   id: string;
   title?: string;
@@ -43,6 +52,18 @@ const toastVariants = cva(
         warning: "[&_svg]:text-warning",
         danger: "[&_svg]:text-danger",
       },
+      /* In bloom mode the root itself takes the variant colour, because the
+         glow is drawn from `currentColor`. The box classes above are still
+         emitted: `.n-toast-bloom` strips them, and that strip lives inside
+         `@media not all and (forced-colors: active)` — so under forced
+         colours, where a glow conveys nothing, the solid box comes back on
+         its own with no second code path. */
+      bloom: {
+        neutral: "n-toast-bloom text-text-primary",
+        success: "n-toast-bloom text-success",
+        warning: "n-toast-bloom text-warning",
+        danger: "n-toast-bloom text-danger",
+      },
     },
     defaultVariants: { variant: "neutral" },
   },
@@ -57,7 +78,7 @@ const iconFor: Record<ToastVariant, typeof Info> = {
 
 export interface ToastProviderProps {
   children: React.ReactNode;
-  surface?: OverlaySurfaceVariant;
+  surface?: ToastSurfaceVariant;
 }
 
 /**
@@ -65,6 +86,7 @@ export interface ToastProviderProps {
  * useToast().toast({...}) to enqueue a notification.
  */
 export function ToastProvider({ children, surface = "auto" }: ToastProviderProps) {
+  const bloom = surface === "bloom";
   const [toasts, setToasts] = React.useState<ToastItem[]>([]);
   const dir = useRadixDirection();
 
@@ -95,8 +117,8 @@ export function ToastProvider({ children, surface = "auto" }: ToastProviderProps
               if (!open) dismiss(id);
             }}
             className={cn(
-              toastVariants({ variant }),
-              getOverlaySurfaceClassName(surface),
+              toastVariants({ variant, bloom: bloom ? variant : undefined }),
+              bloom ? undefined : getOverlaySurfaceClassName(surface),
               "data-[state=open]:animate-slide-in-from-bottom data-[state=closed]:animate-fade-out",
               "motion-reduce:data-[state=open]:animate-none motion-reduce:data-[state=closed]:animate-none",
               "data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)]",

@@ -55,11 +55,14 @@ export function CommandPalette({
   return (
     <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
       <RadixDialog.Portal container={portalContainer}>
-        <RadixDialog.Overlay className="fixed inset-0 z-overlay bg-[rgb(var(--n-shadow-color)/0.4)] animate-fade-in motion-reduce:animate-none" />
+        {/* `n-overlay-scrim` / `n-overlay-panel` are the hooks the appearance layer
+              uses to keep a translucent panel from flattening over its own scrim:
+              the scrim is what gets lightened, never the panel's fill. */}
+        <RadixDialog.Overlay className="n-overlay-scrim fixed inset-0 z-overlay bg-[rgb(var(--n-shadow-color)/0.4)] animate-fade-in motion-reduce:animate-none" />
         <div className="fixed inset-0 z-modal flex items-start justify-center p-4 pt-[15vh] pointer-events-none">
           <RadixDialog.Content
             className={cn(
-              "pointer-events-auto w-full max-w-content-sm overflow-hidden rounded-lg border border-border shadow-lg",
+              "n-overlay-panel pointer-events-auto w-full max-w-content-sm overflow-hidden rounded-lg border border-border shadow-lg",
               getOverlaySurfaceClassName(surface),
               "animate-slide-in-from-bottom motion-reduce:animate-none focus-visible:outline-none",
             )}

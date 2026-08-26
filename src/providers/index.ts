@@ -15,3 +15,5 @@ export type {
   AppearanceScope,
   TransparencyPreference,
 } from "./appearance-provider";
+export { I18nProvider, useI18n, useStaticTranslations } from "./i18n-provider";
+export type { I18nBridge, I18nContextValue, I18nProviderProps, Messages } from "./i18n-provider";

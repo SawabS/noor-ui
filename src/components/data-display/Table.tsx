@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cn } from "../../utilities/cn";
+import { formatRenderCapNotice } from "../../utilities/render-cap";
 
 export const Table = React.forwardRef<
   HTMLTableElement,
@@ -64,6 +65,41 @@ export const TableCell = React.forwardRef<
   />
 ));
 TableCell.displayName = "TableCell";
+
+export interface TableTruncationRowProps extends Omit<
+  React.HTMLAttributes<HTMLTableRowElement>,
+  "children"
+> {
+  /** Rows actually painted. */
+  shown: number;
+  /** Rows that matched — always the full count, never `shown`. */
+  total: number;
+  /** Must match the table's column count so the notice spans the full width. */
+  colSpan: number;
+  locale?: string;
+  children?: React.ReactNode;
+}
+
+/**
+ * Footer row telling the reader that the table is showing a slice.
+ *
+ * `Table` is compositional — it takes children, not an array — so it cannot
+ * apply a cap for you. Cap the array with `applyRenderCap` before mapping it
+ * to rows, then render this at the end of the body. See
+ * src/utilities/render-cap.ts for why the cap exists, and note that only
+ * painting is bounded: `total` must come from the full result set so sorting,
+ * filtering, counts and export stay honest.
+ */
+export const TableTruncationRow = React.forwardRef<HTMLTableRowElement, TableTruncationRowProps>(
+  ({ shown, total, colSpan, locale, className, children, ...props }, ref) => (
+    <tr ref={ref} className={cn("border-b border-border last:border-0", className)} {...props}>
+      <td colSpan={colSpan} className="px-4 py-3 text-start text-caption text-text-muted">
+        {children ?? formatRenderCapNotice({ shown, total, locale })}
+      </td>
+    </tr>
+  ),
+);
+TableTruncationRow.displayName = "TableTruncationRow";
 
 export const TableCaption = React.forwardRef<
   HTMLTableCaptionElement,

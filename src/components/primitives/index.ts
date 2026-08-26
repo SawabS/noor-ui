@@ -11,3 +11,9 @@ export { Typography } from "./Typography";
 export type { TypographyProps } from "./Typography";
 export { ThemeToggle } from "./ThemeToggle";
 export type { ThemeToggleProps } from "./ThemeToggle";
+export { TravellingMarker, useTravellingMarker } from "./TravellingMarker";
+export type {
+  MarkerBox,
+  TravellingMarkerProps,
+  UseTravellingMarkerResult,
+} from "./TravellingMarker";

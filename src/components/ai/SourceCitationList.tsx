@@ -1,6 +1,11 @@
 import { Citation } from "../data-display/Citation";
 import { Typography } from "../primitives/Typography";
 import { cn } from "../../utilities/cn";
+import {
+  DEFAULT_RENDER_CAP,
+  applyRenderCap,
+  formatRenderCapNotice,
+} from "../../utilities/render-cap";
 
 export interface Source {
   title: string;
@@ -10,11 +15,21 @@ export interface Source {
 
 export interface SourceCitationListProps {
   sources: Source[];
+  /**
+   * Maximum sources painted. `null` paints everything. Only painting is
+   * bounded; `sources` is untouched, so counts stay accurate.
+   */
+  renderCap?: number | null;
   className?: string;
 }
 
 /** Numbered list of sources cited by an assistant/research turn. */
-export function SourceCitationList({ sources, className }: SourceCitationListProps) {
+export function SourceCitationList({
+  sources,
+  renderCap = DEFAULT_RENDER_CAP,
+  className,
+}: SourceCitationListProps) {
+  const { visible, total, truncated } = applyRenderCap(sources, renderCap);
   if (sources.length === 0) return null;
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
@@ -22,7 +37,7 @@ export function SourceCitationList({ sources, className }: SourceCitationListPro
         Sources
       </Typography>
       <ol className="flex flex-col gap-1">
-        {sources.map((source, i) => (
+        {visible.map((source, i) => (
           <li key={source.href} className="flex items-center gap-2">
             <Citation index={i + 1} href={source.href} title={source.title} />
             <a
@@ -40,6 +55,11 @@ export function SourceCitationList({ sources, className }: SourceCitationListPro
             ) : null}
           </li>
         ))}
+        {truncated && (
+          <li className="text-caption text-text-muted">
+            {formatRenderCapNotice({ shown: visible.length, total })}
+          </li>
+        )}
       </ol>
     </div>
   );

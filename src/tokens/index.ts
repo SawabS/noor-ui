@@ -26,6 +26,9 @@ export const colorTokens = {
   danger: "--n-danger",
   dangerContrast: "--n-danger-contrast",
   info: "--n-info",
+  accentInteractive: "--n-accent-interactive",
+  accentInteractiveContrast: "--n-accent-interactive-contrast",
+  loaded: "--n-loaded",
 } as const;
 
 export const appearanceTokens = {
@@ -58,9 +61,17 @@ export const lumenValues = {
   },
   dark: {
     canvas: "#080B12",
-    tonal: "#101722",
-    materialFallback: "#121A25",
-    materialFill: "rgb(15 23 35 / 0.72)",
+    // Translucent white tints so raised/tonal adapt to whatever they sit on
+    // instead of pinning one hex that only works over the canvas.
+    tonal: "rgb(255 255 255 / 0.06)",
+    raised: "rgb(255 255 255 / 0.1)",
+    // Retuned so the glass composites *above* the canvas rather than three
+    // RGB points from it. See src/tokens/appearance.css.
+    materialFallback: "#18212F",
+    materialFill: "rgb(38 51 72 / 0.55)",
+    materialFillStrong: "rgb(44 59 82 / 0.75)",
+    materialBorder: "rgb(255 255 255 / 0.16)",
+    materialHighlight: "rgb(255 255 255 / 0.14)",
     focalAccent: "#70AEFF",
     glow: "rgb(47 134 255 / 0.28)",
   },
@@ -207,6 +218,22 @@ export const supportingColors = {
   warning: "#D98B18",
   danger: "#DC4C4C",
   info: "#4385F5",
+} as const;
+
+/**
+ * Chromatic interactive accent per theme. `--n-accent-focal` cannot serve
+ * this role: outside Lumen it falls back to `--n-primary-action`, which is
+ * near-black in light themes and near-white in dark ones.
+ */
+export const interactiveAccents = {
+  light: "#1F5FD0",
+  dark: "#7FB4FF",
+  "github-light": "#0969DA",
+  "github-dark": "#58A6FF",
+  dracula: "#8BE9FD",
+  "one-dark-pro": "#61AFEF",
+  nord: "#88C0D0",
+  "catppuccin-mocha": "#89B4FA",
 } as const;
 
 export const typeScale = [

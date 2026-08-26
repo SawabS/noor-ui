@@ -47,7 +47,7 @@ export function Dialog({
       <RadixDialog.Portal container={portalContainer}>
         <RadixDialog.Overlay
           className={cn(
-            "fixed inset-0 z-overlay bg-[rgb(var(--n-shadow-color)/0.4)]",
+            "n-overlay-scrim fixed inset-0 z-overlay bg-[rgb(var(--n-shadow-color)/0.4)]",
             "animate-fade-in motion-reduce:animate-none",
           )}
         />

@@ -33,6 +33,13 @@
   --n-prim-amber-500: #d98b18;
   --n-prim-red-500: #dc4c4c;
   --n-prim-blue-500: #4385f5;
+  /* Interactive-blue pair. `--n-prim-blue-500` is tuned for status *fills*
+     (info alerts), so it only clears 3.5:1 on white and cannot carry a text
+     tint. These two are picked to clear 4.5:1 against the lightest/darkest
+     canvases in the system, which is what `--n-accent-interactive` needs in
+     order to be usable for hover labels, markers and focus in every theme. */
+  --n-prim-blue-600: #1f5fd0;
+  --n-prim-blue-300: #7fb4ff;
 
   /* Raw shadow primitives (alpha-black, theme-independent) */
   --n-prim-shadow-color: 15 15 15;

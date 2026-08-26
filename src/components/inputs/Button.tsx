@@ -19,7 +19,10 @@ export const buttonVariants = cva(
           "n-control bg-surface-raised text-text-primary border border-border hover:bg-surface-hover",
         outline:
           "n-control border border-border-strong text-text-primary bg-transparent hover:bg-surface-hover",
-        ghost: "bg-transparent text-text-primary hover:bg-surface-hover",
+        // `n-ghost-control` lets the appearance layer swap the hover from a
+        // background fill to a label tint (see src/tokens/appearance.css): a
+        // hover slab fights with any travelling selection marker behind it.
+        ghost: "n-ghost-control bg-transparent text-text-primary hover:bg-surface-hover",
         danger: "bg-danger text-danger-contrast hover:opacity-90",
         link: "bg-transparent text-text-primary underline-offset-4 hover:underline p-0 h-auto",
       },
