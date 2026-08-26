@@ -154,12 +154,24 @@ test.describe("§3 the selection marker travels", () => {
     const marker = page.locator(".n-marker");
     await expect(marker).toHaveAttribute("data-ready", "true");
     const active = page.locator('[role="radio"][aria-checked="true"]');
-    const [markerBox, itemBox] = await Promise.all([marker.boundingBox(), active.boundingBox()]);
+
+    // Polled rather than sampled once: the marker re-measures on
+    // document.fonts.ready, and under a loaded machine that can land after the
+    // first assertion. It must align once the Arabic webfont has settled.
+    //
     // 2px, not 1: offsetLeft/offsetWidth are integer-rounded, and RTL layout
     // with proportional Arabic labels lands on fractional positions. Offsets
     // are still the right measurement — they are untransformed and immune to
     // page scroll, which getBoundingClientRect is not.
-    expect(Math.abs(markerBox!.x - itemBox!.x)).toBeLessThanOrEqual(2);
+    await expect
+      .poll(async () => {
+        const [markerBox, itemBox] = await Promise.all([
+          marker.boundingBox(),
+          active.boundingBox(),
+        ]);
+        return Math.abs(markerBox!.x - itemBox!.x);
+      })
+      .toBeLessThanOrEqual(2);
   });
 });
 
